@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Le Croco Brasseur Events - Karaoke, Open Mic, Brunch et événements privés">
+    <title>Événements - Le Croco Brasseur | Bujumbura's Premier Gastro-Brewpub</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* Additional Events Page Styles */
+        .events-hero {
+            min-height: 70vh;
+            background: linear-gradient(135deg, rgba(46,83,57,0.95) 0%, rgba(75,58,45,0.9) 100%), 
+                        url('../assets/images/events-bg.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 150px 20px 100px;
+        }
+
+        .events-hero h1 {
+            font-size: 72px;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .events-hero .gradient-text {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .events-hero p {
+            font-size: 22px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .event-details-section {
+            padding: 100px 0;
+        }
+
+        .event-main-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
+        }
+
+        .event-image-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .event-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-badge-large {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: var(--primary-gold);
+            color: var(--primary-green);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-content {
+            padding: 50px;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .meta-item i {
+            font-size: 24px;
+            color: var(--primary-gold);
+        }
+
+        .meta-item-text strong {
+            display: block;
+            font-size: 16px;
+            color: var(--primary-green);
+        }
+
+        .meta-item-text span {
+            display: block;
+            font-size: 14px;
+            color: var(--gray-medium);
+        }
+
+        .event-description {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--dark-brown);
+            margin-bottom: 30px;
+        }
+
+        .event-highlights {
+            background: var(--warm-beige);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .event-highlights h4 {
+            font-size: 22px;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .highlights-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .highlight-item i {
+            font-size: 20px;
+            color: var(--primary-gold);
+        }
+
+        .weekly-events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .weekly-event-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .weekly-event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .weekly-event-header {
+            background: var(--primary-green);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .weekly-event-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(212,169,78,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .weekly-event-icon i {
+            font-size: 36px;
+            color: var(--primary-gold);
+        }
+
+        .weekly-event-day {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .weekly-event-title {
+            font-size: 28px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .weekly-event-time {
+            font-size: 16px;
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .weekly-event-body {
+            padding: 30px;
+        }
+
+        .weekly-event-description {
+            font-size: 15px;
+            color: var(--gray-medium);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .private-events-cta {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-brown) 100%);
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .private-events-cta h2 {
+            color: white;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .private-events-cta p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .event-types-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .event-type-box {
+            background: rgba(255,255,255,0.1);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .event-type-box:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .event-type-box i {
+            font-size: 48px;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .event-type-box h4 {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .event-type-box p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .testimonials-section {
+            background: var(--warm-beige);
+            padding: 100px 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 30px;
+        }
+
+        .testimonial-text {
+            font-size: 17px;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--dark-brown);
+            margin-bottom: 25px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info strong {
+            display: block;
+            font-size: 16px;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .author-info span {
+            font-size: 13px;
+            color: var(--gray-medium);
+        }
+
+        .stars {
+            color: var(--primary-gold);
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-preview {
+            padding: 100px 0;
+        }
+
+        .gallery-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .gallery-preview-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-preview-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay-mini {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(46,83,57,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-preview-item:hover .gallery-overlay-mini {
+            opacity: 1;
+        }
+
+        .gallery-overlay-mini i {
+            font-size: 32px;
+            color: var(--primary-gold);
+        }
+
+        @media (max-width: 768px) {
+            .events-hero h1 {
+                font-size: 42px;
+            }
+
+            .event-content {
+                padding: 30px 20px;
+            }
+
+            .event-meta {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .gallery-preview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .event-types-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Le Croco Brasseur Logo">
+                <span class="logo-text">LE CROCO BRASSEUR</span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="../index.html#apropos" class="nav-link">À Propos</a></li>
+                <li><a href="../index.html#brasserie" class="nav-link">Brasserie</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="events.html" class="nav-link active">Événements</a></li>
+                <li><a href="../index.html#galerie" class="nav-link">Galerie</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="../index.html#reservation" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Réserver
+                </a>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/25776313132?text=Bonjour%20Le%20Croco%20Brasseur" 
+       class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Events Hero -->
+    <section class="events-hero">
+        <div class="container">
+            <h1 data-aos="fade-up">
+                <span class="gradient-text">Événements</span><br>
+                & Expériences
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="200">
+                Musique live, soirées à thème et moments inoubliables au cœur de Bujumbura
+            </p>
+            <div data-aos="fade-up" data-aos-delay="400">
+                <a href="#weekly-events" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-alt"></i> Voir le Programme
+                </a>
+                <a href="#private-events" class="btn btn-outline btn-lg" style="margin-left: 20px;">
+                    <i class="fas fa-glass-cheers"></i> Événements Privés
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Events Section -->
+    <section class="event-details-section" id="weekly-events">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Programme Hebdomadaire</span>
+                <h2 class="section-title">Chaque Semaine au Croco</h2>
+                <p class="section-description">
+                    Des événements réguliers pour tous les goûts
+                </p>
+            </div>
+
+            <div class="weekly-events-grid">
+                <!-- Karaoke Night -->
+                <div class="weekly-event-card" data-aos="fade-up">
+                    <div class="weekly-event-header">
+                        <div class="weekly-event-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <p class="weekly-event-day">Chaque Lundi</p>
+                        <h3 class="weekly-event-title">Karaoke Night</h3>
+                        <p class="weekly-event-time">19h00 - 23h00</p>
+                    </div>
+                    <div class="weekly-event-body">
+                        <p class="weekly-event-description">
+                            Montez sur scène et chantez vos chansons préférées! 
+                            Plus de 10,000 titres disponibles en français, anglais, swahili et kirundi. 
+                            Ambiance garantie et public enthousiaste.
+                        </p>
+                        <div class="event-highlights" style="margin: 0;">
+                            <h4 style="font-size: 16px; margin-bottom: 15px;">Inclus:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Système audio professionnel</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Écrans géants</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Happy Hour spécial</li>
+                                <li><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Inscription gratuite</li>
+                            </ul>
+                        </div>
+                        <a href="../index.html#reservation" class="btn btn-outline btn-block" style="margin-top: 20px;">
+                            Réserver pour Lundi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Open Mic Night -->
+                <div class="weekly-event-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="weekly-event-header">
+                        <div class="weekly-event-icon">
+                            <i class="fas fa-guitar"></i>
+                        </div>
+                        <p class="weekly-event-day">Chaque Samedi</p>
+                        <h3 class="weekly-event-title">Open Mic Night</h3>
+                        <p class="weekly-event-time">20h00 - 23h30</p>
+                    </div>
+                    <div class="weekly-event-body">
+                        <p class="weekly-event-description">
+                            La scène est à vous! Musique, poésie, stand-up comedy... 
+                            Partagez votre talent avec un public chaleureux. Inscription sur place 
+                            à partir de 19h30. Slots de 10-15 minutes.
+                        </p>
+                        <div class="event-highlights" style="margin: 0;">
+                            <h4 style="font-size: 16px; margin-bottom: 15px;">Pour les artistes:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Backline complet</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Ingénieur son pro</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Tous styles bienvenus</li>
+                                <li><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Boisson offerte aux artistes</li>
+                            </ul>
+                        </div>
+                        <a href="../index.html#reservation" class="btn btn-outline btn-block" style="margin-top: 20px;">
+                            Réserver pour Samedi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sunday Brunch -->
+                <div class="weekly-event-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="weekly-event-header">
+                        <div class="weekly-event-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <p class="weekly-event-day">Chaque Dimanche</p>
+                        <h3 class="weekly-event-title">Sunday Brunch</h3>
+                        <p class="weekly-event-time">10h00 - 15h00</p>
+                    </div>
+                    <div class="weekly-event-body">
+                        <p class="weekly-event-description">
+                            Commencez votre dimanche avec style! Brunch buffet gourmand, 
+                            cocktails à volonté, musique live acoustique. L'endroit parfait 
+                            pour se détendre en famille ou entre amis.
+                        </p>
+                        <div class="event-highlights" style="margin: 0;">
+                            <h4 style="font-size: 16px; margin-bottom: 15px;">Formule 25,000 BIF:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Buffet à volonté</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Mimosas illimités</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Musique live</li>
+                                <li><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Espace kids friendly</li>
+                            </ul>
+                        </div>
+                        <a href="../index.html#reservation" class="btn btn-outline btn-block" style="margin-top: 20px;">
+                            Réserver pour Dimanche
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Events -->
+    <section class="section-padding" style="background: var(--gray-light);">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Événements Spéciaux</span>
+                <h2 class="section-title">À Venir</h2>
+            </div>
+
+            <div class="event-main-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="event-image-container">
+                    <img src="../assets/images/live-band.jpg" alt="Live Band Performance">
+                    <div class="event-badge-large">Bientôt</div>
+                </div>
+                <div class="event-content">
+                    <h2 style="font-size: 36px; color: var(--primary-green); margin-bottom: 20px;">
+                        Live Band Every Friday - Lancement
+                    </h2>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="meta-item-text">
+                                <strong>À partir de Novembre 2025</strong>
+                                <span>Tous les vendredis</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="meta-item-text">
+                                <strong>21h00 - 00h00</strong>
+                                <span>3 heures de show</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-ticket-alt"></i>
+                            <div class="meta-item-text">
+                                <strong>Entrée: 10,000 BIF</strong>
+                                <span>Incluant 1 boisson</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="event-description">
+                        Préparez-vous à vibrer! Chaque vendredi, Le Croco Brasseur accueille les meilleurs 
+                        groupes live de la région. Rock, jazz, afrobeat, reggae... Une programmation éclectique 
+                        pour des soirées mémorables. Danse, bonne musique et ambiance électrique garanties!
+                    </p>
+                    <div class="event-highlights">
+                        <h4>Ce Qui Vous Attend:</h4>
+                        <div class="highlights-list">
+                            <div class="highlight-item">
+                                <i class="fas fa-music"></i>
+                                <span>Groupes live professionnels</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-cocktail"></i>
+                                <span>Cocktails spéciaux soirée</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-users"></i>
+                                <span>Piste de danse spacieuse</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-beer"></i>
+                                <span>Happy Hour jusqu'à 22h</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <a href="../index.html#reservation" class="btn btn-primary btn-lg">
+                            <i class="fas fa-ticket-alt"></i> Pré-Réserver
+                        </a>
+                        <a href="https://wa.me/25776313132?text=Info%20sur%20les%20concerts%20live" class="btn btn-outline btn-lg" style="margin-left: 15px;">
+                            <i class="fab fa-whatsapp"></i> Plus d'Infos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Events CTA -->
+    <section class="private-events-cta" id="private-events">
+        <div class="container">
+            <div data-aos="fade-up">
+                <span class="section-subtitle" style="color: var(--primary-gold);">Événements Privés</span>
+                <h2>Votre Événement, Notre Passion</h2>
+                <p>
+                    Du cocktail d'entreprise au mariage de rêve, nous créons des expériences 
+                    sur-mesure qui dépassent vos attentes. Capacité jusqu'à 200 personnes.
+                </p>
+            </div>
+
+            <div class="event-types-showcase">
+                <div class="event-type-box" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-briefcase"></i>
+                    <h4>Corporate</h4>
+                    <p>Team buildings, lancements produits, séminaires, conférences</p>
+                </div>
+
+                <div class="event-type-box" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-heart"></i>
+                    <h4>Mariages</h4>
+                    <p>Réceptions, cocktails, cérémonies laïques, rehearsal dinners</p>
+                </div>
+
+                <div class="event-type-box" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-birthday-cake"></i>
+                    <h4>Célébrations</h4>
+                    <p>Anniversaires, graduations, fiançailles, baby showers</p>
+                </div>
+
+                <div class="event-type-box" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h4>Cocktails</h4>
+                    <p>Soirées privées, inaugurations, vernissages, galas</p>
+                </div>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="500">
+                <h3 style="font-size: 32px; margin-bottom: 20px; color: white;">Services Inclus</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto 50px; text-align: left;">
+                    <div style="display: flex; align-items: start; gap: 12px;">
+                        <i class="fas fa-check-circle" style="color: var(--primary-gold); font-size: 20px; margin-top: 2px;"></i>
+                        <span>Chef dédié & menu personnalisé</span>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 12px;">
+                        <i class="fas fa-check-circle" style="color: var(--primary-gold); font-size: 20px; margin-top: 2px;"></i>
+                        <span>Décoration sur-mesure</span>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 12px;">
+                        <i class="fas fa-check-circle" style="color: var(--primary-gold); font-size: 20px; margin-top: 2px;"></i>
+                        <span>Système audio/vidéo professionnel</span>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 12px;">
+                        <i class="fas fa-check-circle" style="color: var(--primary-gold); font-size: 20px; margin-top: 2px;"></i>
+                        <span>Service attentionné</span>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 12px;">
+                        <i class="fas fa-check-circle" style="color: var(--primary-gold); font-size: 20px; margin-top: 2px;"></i>
+                        <span>Parking privé</span>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 12px;">
+                        <i class="fas fa-check-circle" style="color: var(--primary-gold); font-size: 20px; margin-top: 2px;"></i>
+                        <span>Event coordinator dédié</span>
+                    </div>
+                </div>
+
+                <a href="../index.html#contact" class="btn btn-primary btn-lg">
+                    <i class="fas fa-envelope"></i> Demander un Devis
+                </a>
+                <a href="https://wa.me/25776313132?text=Demande%20de%20devis%20événement%20privé" class="btn btn-outline btn-lg" style="margin-left: 15px; border-color: white; color: white;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Témoignages</span>
+                <h2 class="section-title">Ce Qu'ils Disent de Nous</h2>
+            </div>
+
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Nous avons organisé notre team building ici et c'était parfait! 
+                        L'équipe est professionnelle, la nourriture excellente et l'ambiance 
+                        était exactement ce que nous cherchions. Nos 50 collaborateurs ont adoré!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <strong>Jean-Marie Ndayishimiye</strong>
+                            <span>CEO, Tech Solutions Burundi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Le karaoke du lundi est devenu notre rituel entre amis! 
+                        Ambiance incroyable, le staff est aux petits soins et les bières 
+                        artisanales sont délicieuses. On recommande à 100%!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SA</div>
+                        <div class="author-info">
+                            <strong>Sarah Akinyi</strong>
+                            <span>Habituée du lundi soir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "J'ai célébré mon 30ème anniversaire au Croco Brasseur. 
+                        De la décoration au menu en passant par le service, tout était 
+                        parfait. Mes invités n'arrêtent pas d'en parler. Merci l'équipe!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DM</div>
+                        <div class="author-info">
+                            <strong>David Mukiza</strong>
+                            <span>Client satisfait</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Preview -->
+    <section class="gallery-preview">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Galerie</span>
+                <h2 class="section-title">Moments Inoubliables</h2>
+                <p class="section-description">Revivez l'ambiance de nos événements</p>
+            </div>
+
+            <div class="gallery-preview-grid">
+                <div class="gallery-preview-item" data-aos="fade-up">
+                    <img src="../assets/images/gallery/karaoke.jpg" alt="Karaoke Night">
+                    <div class="gallery-overlay-mini">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-preview-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="../assets/images/gallery/interior-1.jpg" alt="Restaurant Interior">
+                    <div class="gallery-overlay-mini">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-preview-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="../assets/images/gallery/bar-area.jpg" alt="Bar Area">
+                    <div class="gallery-overlay-mini">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-preview-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="../assets/images/gallery/beer-taps.jpg" alt="Beer Taps">
+                    <div class="gallery-overlay-mini">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;" data-aos="fade-up">
+                <a href="../index.html#galerie" class="btn btn-outline btn-lg">
+                    <i class="fas fa-images"></i> Voir Toute la Galerie
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section-padding" style="background: var(--primary-green); text-align: center; color: white;">
+        <div class="container">
+            <h2 style="color: white; font-size: 48px; margin-bottom: 20px;" data-aos="fade-up">
+                Prêt pour une Soirée Inoubliable?
+            </h2>
+            <p style="font-size: 18px; max-width: 600px; margin: 0 auto 40px;" data-aos="fade-up" data-aos-delay="100">
+                Rejoignez-nous pour nos événements hebdomadaires ou créez votre événement sur-mesure
+            </p>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="../index.html#reservation" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-check"></i> Réserver Maintenant
+                </a>
+                <a href="../index.html#contact" class="btn btn-outline btn-lg" style="margin-left: 15px; border-color: white; color: white;">
+                    <i class="fas fa-envelope"></i> Nous Contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="../assets/images/logo.png" alt="Le Croco Brasseur" class="footer-logo">
+                    <p class="footer-tagline">Where Bujumbura Meets the World</p>
+                    <p class="footer-text">
+                        Craft beer, world-class cuisine, and unforgettable experiences.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/lecrocobrasseur" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/lecrocobrasseur" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/25776313132" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#accueil">Accueil</a></li>
+                        <li><a href="../index.html#apropos">À Propos</a></li>
+                        <li><a href="../index.html#brasserie">Brasserie</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Événements</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#reservation">Réservations</a></li>
+                        <li><a href="events.html">Événements Privés</a></li>
+                        <li><a href="../index.html#contact">Catering</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Horaires</h4>
+                    <p class="hours-text">
+                        <strong>Tous les jours</strong><br>
+                        6h30 - Tard dans la nuit
+                    </p>
+                    <p class="hours-text">
+                        📍 20, Boulevard de l'Uprona<br>
+                        Rohero, Bujumbura<br>
+                        📞 +257 76 31 31 32
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Le Croco Brasseur. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart"></i> in Bujumbura</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

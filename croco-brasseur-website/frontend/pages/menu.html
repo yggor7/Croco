@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Le Croco Brasseur Menu - Découvrez notre cuisine cosmopolite et nos bières artisanales">
+    <title>Menu - Le Croco Brasseur | Bujumbura's Premier Gastro-Brewpub</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* Additional Menu Page Styles */
+        .menu-hero {
+            min-height: 60vh;
+            background: linear-gradient(135deg, rgba(46,83,57,0.95) 0%, rgba(75,58,45,0.9) 100%), 
+                        url('../assets/images/menu-bg.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 150px 20px 100px;
+        }
+
+        .menu-hero h1 {
+            font-size: 64px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .menu-hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .menu-filters {
+            background: var(--warm-beige);
+            padding: 40px 0;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .menu-section {
+            padding: 80px 0;
+        }
+
+        .menu-section:nth-child(even) {
+            background: var(--gray-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .section-icon i {
+            font-size: 36px;
+            color: var(--primary-green);
+        }
+
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-item-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .menu-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-gold);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .menu-item-title {
+            font-size: 22px;
+            font-family: var(--font-heading);
+            color: var(--primary-green);
+            margin-bottom: 8px;
+        }
+
+        .menu-item-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-gold);
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .menu-item-description {
+            font-size: 15px;
+            color: var(--gray-medium);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .menu-item-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--warm-beige);
+            color: var(--primary-green);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag.vegetarian {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .tag.spicy {
+            background: #FF5722;
+            color: white;
+        }
+
+        .tag.popular {
+            background: var(--primary-gold);
+            color: white;
+        }
+
+        .tag.new {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .drink-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .drink-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .drink-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .drink-name {
+            font-size: 20px;
+            font-family: var(--font-heading);
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .drink-type {
+            font-size: 13px;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .drink-description {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin-bottom: 15px;
+        }
+
+        .drink-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .allergen-info {
+            background: var(--primary-green);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .allergen-info h3 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .allergen-info p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .special-note {
+            background: var(--primary-gold);
+            color: var(--primary-green);
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .menu-hero h1 {
+                font-size: 42px;
+            }
+
+            .menu-items-grid,
+            .drinks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Le Croco Brasseur Logo">
+                <span class="logo-text">LE CROCO BRASSEUR</span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="../index.html#apropos" class="nav-link">À Propos</a></li>
+                <li><a href="../index.html#brasserie" class="nav-link">Brasserie</a></li>
+                <li><a href="menu.html" class="nav-link active">Menu</a></li>
+                <li><a href="events.html" class="nav-link">Événements</a></li>
+                <li><a href="../index.html#galerie" class="nav-link">Galerie</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="../index.html#reservation" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Réserver
+                </a>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/25776313132?text=Bonjour%20Le%20Croco%20Brasseur" 
+       class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Menu Hero -->
+    <section class="menu-hero">
+        <div class="container">
+            <h1 data-aos="fade-up">Notre Menu</h1>
+            <p data-aos="fade-up" data-aos-delay="200">
+                Une cuisine cosmopolite qui marie les saveurs du monde aux traditions culinaires africaines. 
+                Chaque plat est une invitation au voyage.
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu Filters -->
+    <div class="menu-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Tout Voir</button>
+                <button class="filter-btn" data-filter="brunch">Brunch</button>
+                <button class="filter-btn" data-filter="african">Spécialités Africaines</button>
+                <button class="filter-btn" data-filter="international">International</button>
+                <button class="filter-btn" data-filter="beers">Bières</button>
+                <button class="filter-btn" data-filter="cocktails">Cocktails</button>
+                <button class="filter-btn" data-filter="wines">Vins</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brunch Section -->
+    <section class="menu-section" data-category="brunch">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <i class="fas fa-coffee"></i>
+                </div>
+                <h2 class="section-title">Brunch & Petit Déjeuner</h2>
+                <p class="section-description">Disponible tous les jours de 6h30 à 15h00</p>
+            </div>
+
+            <div class="menu-items-grid">
+                <div class="menu-item-card" data-aos="fade-up">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Full English Breakfast</h3>
+                        </div>
+                        <span class="menu-item-price">12,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Œufs, bacon, saucisses, champignons, tomates grillées, haricots, toast et café
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag popular">Populaire</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Eggs Benedict</h3>
+                        </div>
+                        <span class="menu-item-price">10,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Muffin anglais, œuf poché, jambon fumé, sauce hollandaise, pommes de terre
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Classique</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Croco Pancakes</h3>
+                        </div>
+                        <span class="menu-item-price">8,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Stack de 3 pancakes moelleux, sirop d'érable, fruits frais, beurre
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag vegetarian">Végétarien</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Omelette du Chef</h3>
+                        </div>
+                        <span class="menu-item-price">9,500 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        3 œufs, fromage, légumes frais, champignons, jambon, salade verte
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Protéiné</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Avocado Toast</h3>
+                        </div>
+                        <span class="menu-item-price">8,500 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Pain artisanal grillé, avocat écrasé, œuf poché, graines, tomates cerises
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag vegetarian">Végétarien</span>
+                        <span class="tag new">Nouveau</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Continental Breakfast</h3>
+                        </div>
+                        <span class="menu-item-price">7,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Croissants, pain, confiture, beurre, fromage, fruits frais, café/thé
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Léger</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- African Specialties Section -->
+    <section class="menu-section" data-category="african">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <i class="fas fa-drumstick-bite"></i>
+                </div>
+                <h2 class="section-title">Spécialités Africaines</h2>
+                <p class="section-description">Grillades et plats traditionnels revisités</p>
+            </div>
+
+            <div class="menu-items-grid">
+                <div class="menu-item-card" data-aos="fade-up">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Nyama Choma Signature</h3>
+                        </div>
+                        <span class="menu-item-price">18,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Viande grillée marinée (chèvre ou bœuf), ugali, kachumbari, sauce pili pili
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag popular">Spécialité Maison</span>
+                        <span class="tag spicy">Épicé</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Tilapia du Lac Tanganyika</h3>
+                        </div>
+                        <span class="menu-item-price">20,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Poisson frais grillé, riz pilaf, légumes sautés, citron vert
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag popular">Populaire</span>
+                        <span class="tag">Frais du jour</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Brochettes Mixtes</h3>
+                        </div>
+                        <span class="menu-item-price">15,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Brochettes de bœuf, poulet et légumes, frites, sauce arachide
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Grillades</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Braai Sud-Africain</h3>
+                        </div>
+                        <span class="menu-item-price">22,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Assortiment de viandes grillées, boerewors, pap, chakalaka, salades
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag popular">Chef's Choice</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Plantains Grillés</h3>
+                        </div>
+                        <span class="menu-item-price">6,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Plantains caramélisés, sauce sucrée-salée
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag vegetarian">Végétarien</span>
+                        <span class="tag">Side Dish</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Poulet Piri Piri</h3>
+                        </div>
+                        <span class="menu-item-price">16,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Poulet mariné, sauce piri piri maison, riz basmati, légumes grillés
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag spicy">Épicé</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Section -->
+    <section class="menu-section" data-category="international">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <i class="fas fa-hamburger"></i>
+                </div>
+                <h2 class="section-title">International Favorites</h2>
+                <p class="section-description">Classiques du monde entier</p>
+            </div>
+
+            <div class="menu-items-grid">
+                <div class="menu-item-card" data-aos="fade-up">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Croco Gourmet Burger</h3>
+                        </div>
+                        <span class="menu-item-price">14,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        180g bœuf angus, cheddar affiné, bacon, tomate, laitue, oignons caramélisés, frites maison
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag popular">Bestseller</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Pizza Margherita</h3>
+                        </div>
+                        <span class="menu-item-price">12,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Sauce tomate maison, mozzarella di bufala, basilic frais, huile d'olive
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag vegetarian">Végétarien</span>
+                        <span class="tag">Au feu de bois</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Pizza 4 Fromages</h3>
+                        </div>
+                        <span class="menu-item-price">13,500 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Mozzarella, gorgonzola, parmesan, chèvre, crème fraîche
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag vegetarian">Végétarien</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Fish & Chips</h3>
+                        </div>
+                        <span class="menu-item-price">15,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Filet de poisson pané croustillant, frites épaisses, sauce tartare, petits pois
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">British Classic</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Pasta Carbonara</h3>
+                        </div>
+                        <span class="menu-item-price">13,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Pâtes fraîches, pancetta croustillante, œuf, parmesan, poivre noir
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Italien</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Wings Basket</h3>
+                        </div>
+                        <span class="menu-item-price">11,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        12 ailes de poulet épicées, choix de sauce (BBQ, Buffalo, Honey Mustard), céleri, ranch
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag spicy">Épicé</span>
+                        <span class="tag">Parfait avec bière</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craft Beers Section -->
+    <section class="menu-section" data-category="beers">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <i class="fas fa-beer"></i>
+                </div>
+                <h2 class="section-title">Nos Bières Artisanales</h2>
+                <p class="section-description">Brassées sur place selon la tradition allemande</p>
+            </div>
+
+            <div class="drinks-grid">
+                <div class="drink-card" data-aos="fade-up">
+                    <div class="drink-icon">🍺</div>
+                    <h3 class="drink-name">Croco Lager</h3>
+                    <p class="drink-type">Crisp & Refreshing</p>
+                    <p class="drink-description">
+                        Lager dorée légère, parfaite pour les journées chaudes. Notes maltées douces.
+                    </p>
+                    <div class="drink-price">3,000 BIF (50cl)</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag">4.8% ABV</span>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="drink-icon">🍻</div>
+                    <h3 class="drink-name">Tanganyika IPA</h3>
+                    <p class="drink-type">Hoppy & Bold</p>
+                    <p class="drink-description">
+                        IPA aux notes d'agrumes avec une finale houblonnée prononcée.
+                    </p>
+                    <div class="drink-price">3,500 BIF (50cl)</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag">6.2% ABV</span>
+                        <span class="tag popular">Populaire</span>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="drink-icon">🥃</div>
+                    <h3 class="drink-name">Dark Croco</h3>
+                    <p class="drink-type">Rich & Smooth</p>
+                    <p class="drink-description">
+                        Stout riche avec notes de café et chocolat. Texture veloutée.
+                    </p>
+                    <div class="drink-price">3,500 BIF (50cl)</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag">5.5% ABV</span>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="drink-icon">🍺</div>
+                    <h3 class="drink-name">Amber Ale</h3>
+                    <p class="drink-type">Balanced & Malty</p>
+                    <p class="drink-description">
+                        Ambrée équilibrée avec des touches de caramel. Douceur maltée.
+                    </p>
+                    <div class="drink-price">3,200 BIF (50cl)</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag">5.2% ABV</span>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="drink-icon">🍻</div>
+                    <h3 class="drink-name">Weissbier</h3>
+                    <p class="drink-type">Belgian Style</p>
+                    <p class="drink-description">
+                        Bière blanche trouble, notes de banane et clou de girofle.
+                    </p>
+                    <div class="drink-price">3,300 BIF (50cl)</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag">5.0% ABV</span>
+                        <span class="tag new">Nouveau</span>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="drink-icon">🍺</div>
+                    <h3 class="drink-name">Pilsner</h3>
+                    <p class="drink-type">Classic & Clean</p>
+                    <p class="drink-description">
+                        Pilsner tchèque classique, houblonnée, amère et rafraîchissante.
+                    </p>
+                    <div class="drink-price">3,000 BIF (50cl)</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag">4.5% ABV</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;" data-aos="fade-up">
+                <p style="font-size: 16px; color: var(--gray-medium); margin-bottom: 20px;">
+                    <strong>Dégustation de Bières:</strong> 5 bières au choix - 12,000 BIF
+                </p>
+                <a href="../index.html#reservation" class="btn btn-primary btn-lg">
+                    <i class="fas fa-beer"></i> Réserver une Dégustation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cocktails Section -->
+    <section class="menu-section" data-category="cocktails">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <i class="fas fa-cocktail"></i>
+                </div>
+                <h2 class="section-title">Cocktails Signature</h2>
+                <p class="section-description">Créations originales de notre mixologue</p>
+            </div>
+
+            <div class="drinks-grid">
+                <div class="drink-card" data-aos="fade-up">
+                    <div class="drink-icon">🍹</div>
+                    <h3 class="drink-name">Tanganyika Sunset</h3>
+                    <p class="drink-type">Signature</p>
+                    <p class="drink-description">
+                        Rhum, passion, mangue, citron vert, sirop de gingembre
+                    </p>
+                    <div class="drink-price">8,000 BIF</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag popular">Signature</span>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="drink-icon">🍸</div>
+                    <h3 class="drink-name">Mojito aux Herbes Locales</h3>
+                    <p class="drink-type">Refreshing</p>
+                    <p class="drink-description">
+                        Rhum blanc, menthe locale, citron vert, sucre de canne, soda
+                    </p>
+                    <div class="drink-price">7,000 BIF</div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="drink-icon">🥃</div>
+                    <h3 class="drink-name">Old Fashioned</h3>
+                    <p class="drink-type">Classic</p>
+                    <p class="drink-description">
+                        Whisky bourbon, sucre, angostura, zeste d'orange
+                    </p>
+                    <div class="drink-price">9,000 BIF</div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="drink-icon">🍹</div>
+                    <h3 class="drink-name">Piña Colada</h3>
+                    <p class="drink-type">Tropical</p>
+                    <p class="drink-description">
+                        Rhum blanc, crème de coco, jus d'ananas frais
+                    </p>
+                    <div class="drink-price">7,500 BIF</div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="drink-icon">🍸</div>
+                    <h3 class="drink-name">Margarita</h3>
+                    <p class="drink-type">Mexican</p>
+                    <p class="drink-description">
+                        Tequila, triple sec, citron vert, sel
+                    </p>
+                    <div class="drink-price">8,000 BIF</div>
+                </div>
+
+                <div class="drink-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="drink-icon">🍹</div>
+                    <h3 class="drink-name">Mocktails</h3>
+                    <p class="drink-type">Sans Alcool</p>
+                    <p class="drink-description">
+                        Virgin Mojito, Piña Colada, Fruits Passion
+                    </p>
+                    <div class="drink-price">5,000 BIF</div>
+                    <div class="menu-item-tags" style="justify-content: center; margin-top: 15px;">
+                        <span class="tag">0% Alcool</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wines Section -->
+    <section class="menu-section" data-category="wines">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <i class="fas fa-wine-bottle"></i>
+                </div>
+                <h2 class="section-title">Vins Premium</h2>
+                <p class="section-description">Sélection française et sud-africaine</p>
+            </div>
+
+            <div class="menu-items-grid">
+                <div class="menu-item-card" data-aos="fade-up">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Bordeaux Rouge</h3>
+                            <p style="font-size: 13px; color: var(--primary-gold); margin-top: 5px;">France</p>
+                        </div>
+                        <span class="menu-item-price">25,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Château Margaux, corps moyen, tanins soyeux
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Verre: 7,000 BIF</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Chardonnay</h3>
+                            <p style="font-size: 13px; color: var(--primary-gold); margin-top: 5px;">Afrique du Sud</p>
+                        </div>
+                        <span class="menu-item-price">22,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Stellenbosch, notes de vanille et fruits tropicaux
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Verre: 6,500 BIF</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Rosé de Provence</h3>
+                            <p style="font-size: 13px; color: var(--primary-gold); margin-top: 5px;">France</p>
+                        </div>
+                        <span class="menu-item-price">24,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Frais et fruité, notes de fraise et agrumes
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag popular">Été</span>
+                        <span class="tag">Verre: 7,000 BIF</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Pinotage</h3>
+                            <p style="font-size: 13px; color: var(--primary-gold); margin-top: 5px;">Afrique du Sud</p>
+                        </div>
+                        <span class="menu-item-price">20,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Cépage unique sud-africain, fruité et épicé
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Verre: 6,000 BIF</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Champagne</h3>
+                            <p style="font-size: 13px; color: var(--primary-gold); margin-top: 5px;">France</p>
+                        </div>
+                        <span class="menu-item-price">45,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Moët & Chandon Brut Impérial
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag popular">Célébration</span>
+                    </div>
+                </div>
+
+                <div class="menu-item-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="menu-item-header">
+                        <div>
+                            <h3 class="menu-item-title">Riesling</h3>
+                            <p style="font-size: 13px; color: var(--primary-gold); margin-top: 5px;">Allemagne</p>
+                        </div>
+                        <span class="menu-item-price">23,000 BIF</span>
+                    </div>
+                    <p class="menu-item-description">
+                        Demi-sec, notes de pêche et miel
+                    </p>
+                    <div class="menu-item-tags">
+                        <span class="tag">Verre: 6,500 BIF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Allergen Info -->
+    <div class="allergen-info">
+        <div class="container">
+            <h3 data-aos="fade-up">Allergènes & Informations Diététiques</h3>
+            <p data-aos="fade-up" data-aos-delay="100">
+                Nous prenons les allergies alimentaires très au sérieux. Veuillez informer votre serveur de toute allergie 
+                ou restriction diététique. Notre équipe se fera un plaisir d'adapter nos plats à vos besoins. 
+                Tous nos ingrédients sont frais et sourcés localement dans la mesure du possible.
+            </p>
+            <div class="special-note" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-phone"></i> Réservations & Info: +257 76 31 31 32
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="section-padding" style="text-align: center; background: var(--warm-beige);">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Prêt à Réserver?</h2>
+            <p class="section-description" data-aos="fade-up" data-aos-delay="100">
+                Réservez votre table dès maintenant et découvrez notre cuisine exceptionnelle
+            </p>
+            <div style="margin-top: 40px;" data-aos="fade-up" data-aos-delay="200">
+                <a href="../index.html#reservation" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-check"></i> Réserver une Table
+                </a>
+                <a href="https://wa.me/25776313132" class="btn btn-outline btn-lg" style="margin-left: 20px;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="../assets/images/logo.png" alt="Le Croco Brasseur" class="footer-logo">
+                    <p class="footer-tagline">Where Bujumbura Meets the World</p>
+                    <p class="footer-text">
+                        Craft beer, world-class cuisine, and unforgettable experiences.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/lecrocobrasseur" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/lecrocobrasseur" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/25776313132" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#accueil">Accueil</a></li>
+                        <li><a href="../index.html#apropos">À Propos</a></li>
+                        <li><a href="../index.html#brasserie">Brasserie</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Événements</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#reservation">Réservations</a></li>
+                        <li><a href="events.html">Événements Privés</a></li>
+                        <li><a href="../index.html#contact">Catering</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Horaires</h4>
+                    <p class="hours-text">
+                        <strong>Tous les jours</strong><br>
+                        6h30 - Tard dans la nuit
+                    </p>
+                    <p class="hours-text">
+                        📍 20, Boulevard de l'Uprona<br>
+                        Rohero, Bujumbura<br>
+                        📞 +257 76 31 31 32
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Le Croco Brasseur. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart"></i> in Bujumbura</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const menuSections = document.querySelectorAll('.menu-section');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                menuSections.forEach(section => {
+                    const category = section.getAttribute('data-category');
+                    
+                    if (filter === 'all' || category === filter) {
+                        section.style.display = 'block';
+                        setTimeout(() => {
+                            section.style.opacity = '1';
+                        }, 10);
+                    } else {
+                        section.style.opacity = '0';
+                        setTimeout(() => {
+                            section.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
