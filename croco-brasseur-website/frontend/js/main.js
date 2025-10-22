@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initGalleryFilters();
     initFAQ();
     initScrollAnimations();
+    setActiveNavLink();
 });
 
 // ========================================
@@ -54,27 +55,52 @@ function initNavigation() {
         }
     });
     
-    // Active nav link on scroll
+    // Active nav link on scroll (only for index.html with sections)
     const sections = document.querySelectorAll('section[id]');
     
-    window.addEventListener('scroll', () => {
-        let current = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
+    if (sections.length > 0) {
+        window.addEventListener('scroll', () => {
+            let current = '';
             
-            if (window.scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
         });
+    }
+}
+
+// ========================================
+// ACTIVE PAGE DETECTION
+// ========================================
+
+function setActiveNavLink() {
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkPath = link.getAttribute('href');
         
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
+        // Check if current page matches the link
+        if (currentPage.includes('menu.html') && linkPath.includes('menu.html')) {
+            link.classList.add('active');
+        } else if (currentPage.includes('events.html') && linkPath.includes('events.html')) {
+            link.classList.add('active');
+        } else if ((currentPage === '/' || currentPage.includes('index.html') || currentPage.endsWith('/')) && linkPath.includes('#accueil')) {
+            link.classList.add('active');
+        }
     });
 }
 

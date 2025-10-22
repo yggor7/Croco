@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin Le Croco Brasseur</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/logo.png" alt="Logo" class="logo">
+                <h2>Admin Panel</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <a href="dashboard.html" class="nav-link active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="reservations.html" class="nav-link">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Réservations</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="gallery.html" class="nav-link">
+                        <i class="fas fa-images"></i>
+                        <span>Galerie</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="videos.html" class="nav-link">
+                        <i class="fas fa-video"></i>
+                        <span>Vidéos</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="menu.html" class="nav-link">
+                        <i class="fas fa-utensils"></i>
+                        <span>Menu</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <h4 id="userName">Admin</h4>
+                        <p id="userRole">Administrateur</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="btn btn-danger btn-block">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Dashboard</h1>
+                <div class="top-bar-actions">
+                    <button class="btn btn-outline" onclick="location.reload()">
+                        <i class="fas fa-sync-alt"></i> Actualiser
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="pendingReservations">0</h3>
+                            <p>Réservations en attente</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalReservations">0</h3>
+                            <p>Total des réservations</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="galleryImages">0</h3>
+                            <p>Images dans la galerie</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon info">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="menuItems">0</h3>
+                            <p>Items au menu</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Actions Rapides</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-grid">
+                            <a href="gallery.html" class="stat-card" style="text-decoration: none; color: inherit;">
+                                <div class="stat-icon primary">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 style="font-size: 1.2rem;">Ajouter Photo</h3>
+                                    <p>Galerie</p>
+                                </div>
+                            </a>
+
+                            <a href="videos.html" class="stat-card" style="text-decoration: none; color: inherit;">
+                                <div class="stat-icon info">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 style="font-size: 1.2rem;">Ajouter Vidéo</h3>
+                                    <p>Vidéos</p>
+                                </div>
+                            </a>
+
+                            <a href="menu.html" class="stat-card" style="text-decoration: none; color: inherit;">
+                                <div class="stat-icon success">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 style="font-size: 1.2rem;">Ajouter Plat</h3>
+                                    <p>Menu</p>
+                                </div>
+                            </a>
+
+                            <a href="reservations.html" class="stat-card" style="text-decoration: none; color: inherit;">
+                                <div class="stat-icon warning">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 style="font-size: 1.2rem;">Voir Réservations</h3>
+                                    <p>Réservations</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reservations -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Réservations Récentes</h2>
+                        <a href="reservations.html" class="btn btn-outline btn-sm">Voir tout</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="recentReservationsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Personnes</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentReservationsBody">
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            <div class="spinner"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Activité Récente</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentActivityList">
+                            <div class="text-center">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin-auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

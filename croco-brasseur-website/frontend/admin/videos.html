@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Vidéos - Admin Le Croco Brasseur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/logo.png" alt="Logo" class="logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="reservations.html" class="nav-link">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Réservations</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="gallery.html" class="nav-link">
+                        <i class="fas fa-images"></i>
+                        <span>Galerie</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="videos.html" class="nav-link active">
+                        <i class="fas fa-video"></i>
+                        <span>Vidéos</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="menu.html" class="nav-link">
+                        <i class="fas fa-utensils"></i>
+                        <span>Menu</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-details">
+                        <h4 id="userName">Admin</h4>
+                        <p id="userRole">Administrateur</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="btn btn-danger btn-block">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Gestion des Vidéos</h1>
+                <div class="top-bar-actions">
+                    <button class="btn btn-primary" onclick="openAddVideoModal()">
+                        <i class="fas fa-plus"></i> Ajouter une Vidéo
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- Filters -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <select id="filterCategory" class="form-control" onchange="loadVideos()">
+                                <option value="">Toutes les catégories</option>
+                                <option value="hero">Hero (En-tête)</option>
+                                <option value="gallery">Galerie</option>
+                                <option value="promo">Promo</option>
+                                <option value="event">Événement</option>
+                            </select>
+                            <select id="filterType" class="form-control" onchange="loadVideos()">
+                                <option value="">Tous les types</option>
+                                <option value="upload">Upload local</option>
+                                <option value="youtube">YouTube</option>
+                                <option value="vimeo">Vimeo</option>
+                            </select>
+                            <select id="filterActif" class="form-control" onchange="loadVideos()">
+                                <option value="">Tous les statuts</option>
+                                <option value="true">Actif</option>
+                                <option value="false">Inactif</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Videos Grid -->
+                <div class="card">
+                    <div class="card-body">
+                        <div id="videosGrid" class="gallery-grid">
+                            <div class="text-center" style="grid-column: 1 / -1;">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Ajouter une Vidéo</h3>
+                <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="videoForm">
+                    <input type="hidden" id="videoId">
+
+                    <div class="form-group">
+                        <label for="videoType">Type de vidéo *</label>
+                        <select id="videoType" required onchange="toggleVideoInput()">
+                            <option value="">Sélectionner...</option>
+                            <option value="upload">Upload fichier local</option>
+                            <option value="youtube">Lien YouTube</option>
+                            <option value="vimeo">Lien Vimeo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="fileInputGroup" style="display: none;">
+                        <label for="videoFile">Fichier vidéo (max 100MB)</label>
+                        <input type="file" id="videoFile" accept="video/*">
+                        <small>Formats: MP4, AVI, MOV, WEBM</small>
+                    </div>
+
+                    <div class="form-group" id="urlInputGroup" style="display: none;">
+                        <label for="videoUrl">URL de la vidéo *</label>
+                        <input type="url" id="videoUrl" placeholder="https://www.youtube.com/watch?v=...">
+                        <small>Collez l'URL complète de YouTube ou Vimeo</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titre">Titre *</label>
+                        <input type="text" id="titre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Catégorie *</label>
+                        <select id="category" required>
+                            <option value="">Sélectionner...</option>
+                            <option value="hero">Hero (En-tête du site)</option>
+                            <option value="gallery">Galerie</option>
+                            <option value="promo">Promo</option>
+                            <option value="event">Événement</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ordre">Ordre d'affichage</label>
+                        <input type="number" id="ordre" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="actif" checked>
+                            Actif
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeVideoModal()">Annuler</button>
+                <button class="btn btn-primary" onclick="saveVideo()">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-auth.js"></script>
+    <script src="js/videos.js"></script>
+</body>
+</html>

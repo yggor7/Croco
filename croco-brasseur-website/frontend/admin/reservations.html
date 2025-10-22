@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Réservations - Admin Le Croco Brasseur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/logo.png" alt="Logo" class="logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="reservations.html" class="nav-link active">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Réservations</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="gallery.html" class="nav-link">
+                        <i class="fas fa-images"></i>
+                        <span>Galerie</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="videos.html" class="nav-link">
+                        <i class="fas fa-video"></i>
+                        <span>Vidéos</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="menu.html" class="nav-link">
+                        <i class="fas fa-utensils"></i>
+                        <span>Menu</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-details">
+                        <h4 id="userName">Admin</h4>
+                        <p id="userRole">Administrateur</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="btn btn-danger btn-block">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Gestion des Réservations</h1>
+                <div class="top-bar-actions">
+                    <button class="btn btn-outline" onclick="loadReservations()">
+                        <i class="fas fa-sync-alt"></i> Actualiser
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- Filters -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <select id="filterStatut" class="form-control" onchange="loadReservations()">
+                                <option value="">Tous les statuts</option>
+                                <option value="en_attente">En attente</option>
+                                <option value="confirmee">Confirmée</option>
+                                <option value="annulee">Annulée</option>
+                                <option value="terminee">Terminée</option>
+                            </select>
+                            <input type="date" id="filterDate" class="form-control" onchange="loadReservations()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reservations Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Client</th>
+                                        <th>Contact</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Personnes</th>
+                                        <th>Occasion</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reservationsBody">
+                                    <tr>
+                                        <td colspan="9" class="text-center">
+                                            <div class="spinner"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Reservation Detail Modal -->
+    <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Détails de la Réservation</h3>
+                <button class="modal-close" onclick="closeReservationModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="reservationDetail">
+                <!-- Details loaded dynamically -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeReservationModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-auth.js"></script>
+    <script src="js/reservations.js"></script>
+</body>
+</html>

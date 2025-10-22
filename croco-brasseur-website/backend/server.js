@@ -45,20 +45,41 @@ pool.getConnection()
     });
 
 // ========================================
-// EMAIL CONFIGURATION
+// EMAIL CONFIGURATION (Optional)
 // ========================================
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+let transporter = null;
+try {
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+        transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+        console.log('✅ Email notifications enabled');
+    } else {
+        console.log('⚠️ Email not configured (EMAIL_USER/EMAIL_PASS missing in .env)');
     }
-});
+} catch (error) {
+    console.warn('⚠️ Email configuration error:', error.message);
+}
 
 // ========================================
 // ROUTES
 // ========================================
+
+// Import admin routes
+const adminRoutes = require('./routes/admin');
+const menuController = require('./controllers/menuController');
+
+// Admin routes (protected)
+app.use('/api/admin', adminRoutes);
+
+// Public routes
+// Menu public route
+app.get('/api/menu', menuController.getMenuByCategory);
 
 // Home route
 app.get('/', (req, res) => {
@@ -158,13 +179,15 @@ app.post('/api/reservations', async (req, res) => {
             `
         };
 
-        // Send emails
-        try {
-            await transporter.sendMail(customerMailOptions);
-            await transporter.sendMail(restaurantMailOptions);
-        } catch (emailError) {
-            console.error('Email error:', emailError);
-            // Continue even if email fails
+        // Send emails (if configured)
+        if (transporter) {
+            try {
+                await transporter.sendMail(customerMailOptions);
+                await transporter.sendMail(restaurantMailOptions);
+            } catch (emailError) {
+                console.error('Email error:', emailError);
+                // Continue even if email fails
+            }
         }
 
         res.status(201).json({
@@ -242,10 +265,12 @@ app.post('/api/contact', async (req, res) => {
             `
         };
 
-        try {
-            await transporter.sendMail(mailOptions);
-        } catch (emailError) {
-            console.error('Email error:', emailError);
+        if (transporter) {
+            try {
+                await transporter.sendMail(mailOptions);
+            } catch (emailError) {
+                console.error('Email error:', emailError);
+            }
         }
 
         res.status(201).json({
@@ -390,10 +415,12 @@ app.post('/api/catering', async (req, res) => {
             `
         };
 
-        try {
-            await transporter.sendMail(mailOptions);
-        } catch (emailError) {
-            console.error('Email error:', emailError);
+        if (transporter) {
+            try {
+                await transporter.sendMail(mailOptions);
+            } catch (emailError) {
+                console.error('Email error:', emailError);
+            }
         }
 
         res.status(201).json({

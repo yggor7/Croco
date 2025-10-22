@@ -1,15 +1,22 @@
 // Booking Controller
 const { pool } = require('../config/database');
-const nodemailer = require('nodemailer');
 
-// Email transporter
-const transporter = nodemailer.createTransporter({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+// Email transporter (optional)
+let transporter = null;
+try {
+    const nodemailer = require('nodemailer');
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+        transporter = nodemailer.createTransporter({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
     }
-});
+} catch (error) {
+    console.warn('⚠️ Nodemailer not configured. Email notifications disabled.');
+}
 
 // Create reservation
 exports.createReservation = async (req, res) => {
@@ -67,12 +74,17 @@ exports.createReservation = async (req, res) => {
             html: generateRestaurantEmailTemplate(prenom, nom, email, telephone, date_reservation, heure_reservation, nombre_personnes, occasion, message_special, result.insertId)
         };
 
-        // Send emails
-        try {
-            await transporter.sendMail(customerMailOptions);
-            await transporter.sendMail(restaurantMailOptions);
-        } catch (emailError) {
-            console.error('Email sending error:', emailError);
+        // Send emails (if configured)
+        if (transporter) {
+            try {
+                await transporter.sendMail(customerMailOptions);
+                await transporter.sendMail(restaurantMailOptions);
+            } catch (emailError) {
+                console.error('Email sending error:', emailError);
+                // Continue even if email fails
+            }
+        } else {
+            console.log('📧 Email not sent (nodemailer not configured)');
         }
 
         res.status(201).json({

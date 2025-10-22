@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Menu - Admin Le Croco Brasseur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/logo.png" alt="Logo" class="logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="reservations.html" class="nav-link">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Réservations</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="gallery.html" class="nav-link">
+                        <i class="fas fa-images"></i>
+                        <span>Galerie</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="videos.html" class="nav-link">
+                        <i class="fas fa-video"></i>
+                        <span>Vidéos</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="menu.html" class="nav-link active">
+                        <i class="fas fa-utensils"></i>
+                        <span>Menu</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-details">
+                        <h4 id="userName">Admin</h4>
+                        <p id="userRole">Administrateur</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="btn btn-danger btn-block">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Gestion du Menu</h1>
+                <div class="top-bar-actions">
+                    <button class="btn btn-secondary" onclick="openCategoryModal()">
+                        <i class="fas fa-plus"></i> Catégorie
+                    </button>
+                    <button class="btn btn-primary" onclick="openItemModal()">
+                        <i class="fas fa-plus"></i> Plat
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- Menu by Categories -->
+                <div id="menuContainer">
+                    <div class="text-center">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Category Modal -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="categoryModalTitle">Ajouter une Catégorie</h3>
+                <button class="modal-close" onclick="closeCategoryModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <input type="hidden" id="categoryId">
+                    <div class="form-group">
+                        <label for="categoryNom">Nom (Français) *</label>
+                        <input type="text" id="categoryNom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryNomEn">Nom (Anglais)</label>
+                        <input type="text" id="categoryNomEn">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryDescription">Description</label>
+                        <textarea id="categoryDescription" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryIcon">Icône (Font Awesome)</label>
+                        <input type="text" id="categoryIcon" placeholder="fa-coffee">
+                        <small>Ex: fa-coffee, fa-pizza-slice, fa-hamburger</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryOrdre">Ordre</label>
+                        <input type="number" id="categoryOrdre" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="categoryActif" checked>
+                            Actif
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeCategoryModal()">Annuler</button>
+                <button class="btn btn-primary" onclick="saveCategory()">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Item Modal -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="itemModalTitle">Ajouter un Plat</h3>
+                <button class="modal-close" onclick="closeItemModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="itemForm">
+                    <input type="hidden" id="itemId">
+
+                    <div class="form-group">
+                        <label for="itemCategory">Catégorie *</label>
+                        <select id="itemCategory" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemNom">Nom (Français) *</label>
+                        <input type="text" id="itemNom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemNomEn">Nom (Anglais)</label>
+                        <input type="text" id="itemNomEn">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemDescription">Description (Français)</label>
+                        <textarea id="itemDescription" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemDescriptionEn">Description (Anglais)</label>
+                        <textarea id="itemDescriptionEn" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemPrix">Prix</label>
+                        <input type="number" id="itemPrix" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemDevise">Devise</label>
+                        <input type="text" id="itemDevise" value="BIF" maxlength="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemIngredients">Ingrédients</label>
+                        <textarea id="itemIngredients" rows="2" placeholder="Séparez par des virgules"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemAllergenes">Allergènes</label>
+                        <input type="text" id="itemAllergenes" placeholder="Ex: gluten, noix, lactose">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemEpice">Niveau d'épices</label>
+                        <select id="itemEpice">
+                            <option value="doux">Doux</option>
+                            <option value="moyen">Moyen</option>
+                            <option value="epice">Épicé</option>
+                            <option value="tres_epice">Très épicé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Options diététiques:</label>
+                        <div>
+                            <label style="display: inline-block; margin-right: 15px;">
+                                <input type="checkbox" id="itemVegetarien"> Végétarien
+                            </label>
+                            <label style="display: inline-block; margin-right: 15px;">
+                                <input type="checkbox" id="itemVegan"> Vegan
+                            </label>
+                            <label style="display: inline-block;">
+                                <input type="checkbox" id="itemSansGluten"> Sans gluten
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Badges:</label>
+                        <div>
+                            <label style="display: inline-block; margin-right: 15px;">
+                                <input type="checkbox" id="itemPopulaire"> Populaire
+                            </label>
+                            <label style="display: inline-block;">
+                                <input type="checkbox" id="itemNouveau"> Nouveau
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemOrdre">Ordre</label>
+                        <input type="number" id="itemOrdre" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="itemDisponible" checked>
+                            Disponible
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeItemModal()">Annuler</button>
+                <button class="btn btn-primary" onclick="saveItem()">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-auth.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>
