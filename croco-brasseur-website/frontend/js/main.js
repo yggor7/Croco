@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initMobileMenu();
     initSmoothScroll();
-    initGalleryFilters();
+    loadGalleryImages(); // Load gallery images from database
     initFAQ();
     initScrollAnimations();
     setActiveNavLink();
@@ -159,24 +159,65 @@ function initSmoothScroll() {
 }
 
 // ========================================
+// LOAD GALLERY IMAGES FROM DATABASE
+// ========================================
+
+async function loadGalleryImages() {
+    try {
+        const response = await fetch('http://localhost:3000/api/gallery?actif=true');
+        const data = await response.json();
+
+        if (data.success && data.data.length > 0) {
+            const galleryGrid = document.querySelector('.gallery-grid');
+            if (!galleryGrid) return; // Exit if gallery grid not found on this page
+
+            // Clear existing gallery items
+            galleryGrid.innerHTML = '';
+
+            // Add images from database
+            data.data.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.setAttribute('data-category', image.category);
+                galleryItem.innerHTML = `
+                    <img src="${image.filepath}" alt="${image.titre}">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>${image.titre}</p>
+                    </div>
+                `;
+                galleryGrid.appendChild(galleryItem);
+            });
+
+            // Initialize gallery filters after loading images
+            initGalleryFilters();
+        }
+    } catch (error) {
+        console.error('Error loading gallery images:', error);
+        // If there's an error, initialize filters with existing HTML images
+        initGalleryFilters();
+    }
+}
+
+// ========================================
 // GALLERY FILTERS
 // ========================================
 
 function initGalleryFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
-    
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             // Remove active class from all buttons
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
+
             const filter = btn.getAttribute('data-filter');
-            
+
             galleryItems.forEach(item => {
                 const category = item.getAttribute('data-category');
-                
+
                 if (filter === 'all' || category === filter) {
                     item.style.display = 'block';
                     setTimeout(() => {
@@ -193,7 +234,7 @@ function initGalleryFilters() {
             });
         });
     });
-    
+
     // Gallery lightbox (simple implementation)
     galleryItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -441,6 +482,92 @@ if ('IntersectionObserver' in window) {
     const images = document.querySelectorAll('img[data-src]');
     images.forEach(img => imageObserver.observe(img));
 }
+
+// ========================================
+// CUSTOM CURSOR - LUXURY INTERACTIVE
+// ========================================
+
+function initCustomCursor() {
+    // Check if device supports hover (not touch device)
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        // Create cursor elements
+        const cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+
+        // Create arrow cursor with SVG
+        const cursorArrow = document.createElement('div');
+        cursorArrow.className = 'custom-cursor-arrow';
+        cursorArrow.innerHTML = `
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3 L3 18 L8 13 L12 21 L14 20 L10 12 L18 12 Z"/>
+            </svg>
+        `;
+
+        document.body.appendChild(cursor);
+        document.body.appendChild(cursorArrow);
+
+        // Track mouse position
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        let arrowX = 0;
+        let arrowY = 0;
+
+        // Update mouse position
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Smooth cursor animation
+        function animateCursor() {
+            // Smooth follow for outer circle
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+
+            // Faster follow for arrow
+            arrowX += (mouseX - arrowX) * 0.5;
+            arrowY += (mouseY - arrowY) * 0.5;
+            cursorArrow.style.left = arrowX + 'px';
+            cursorArrow.style.top = arrowY + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effects on interactive elements
+        const hoverElements = document.querySelectorAll('a, button, .btn, .filter-btn, .gallery-item, .nav-link, input, select, textarea, .faq-question');
+
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorArrow.classList.add('hover');
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorArrow.classList.remove('hover');
+            });
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            cursorArrow.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '0.8';
+            cursorArrow.style.opacity = '1';
+        });
+    }
+}
+
+// Initialize custom cursor
+document.addEventListener('DOMContentLoaded', initCustomCursor);
 
 // ========================================
 // CONSOLE MESSAGE

@@ -36,8 +36,67 @@
     --section-padding: 120px;
     --section-padding-mobile: 60px;
     
-    /* Transitions */
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Transitions - Smoother & More Sophisticated */
+    --transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-fast: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-slow: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ========================================
+   CUSTOM CURSOR - LUXURY STYLE WITH ARROW
+   ======================================== */
+
+.custom-cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primary-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.15s ease-out;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+}
+
+.custom-cursor-arrow {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 10000;
+    transition: all 0.1s ease-out;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.custom-cursor-arrow svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--primary-gold);
+}
+
+.custom-cursor.hover {
+    width: 60px;
+    height: 60px;
+    background: rgba(201, 169, 97, 0.15);
+    border-width: 1px;
+    opacity: 1;
+}
+
+.custom-cursor-arrow.hover svg {
+    fill: var(--dark-gray);
+    transform: scale(1.2);
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    body {
+        cursor: auto !important;
+    }
+    .custom-cursor,
+    .custom-cursor-arrow {
+        display: none;
+    }
 }
 
 /* ========================================
@@ -64,6 +123,7 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1860,6 +1920,377 @@ ul {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--dark-gray);
+}
+
+/* ========================================
+   ADVANCED ANIMATIONS - The Dead Rabbit Style
+   ======================================== */
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In Scale Animation */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Slide In From Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In From Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Gentle Float Animation */
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(201, 169, 97, 0.6);
+    }
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Apply animations to elements */
+.hero-content .hero-badge {
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-content .hero-title {
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.hero-content .hero-subtitle {
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.hero-content .hero-buttons {
+    animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+.hero-content .hero-info {
+    animation: fadeInUp 1s ease-out 1s both;
+}
+
+.scroll-indicator {
+    animation: fadeInUp 1.2s ease-out 1.2s both, gentleFloat 3s ease-in-out 2s infinite;
+}
+
+/* Section animations - triggered by AOS library */
+.section-subtitle {
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+.section-title {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.section-description {
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+/* Card hover effects enhancement */
+.beer-card,
+.event-card,
+.menu-category,
+.drink-category {
+    transform-origin: center;
+    transition: var(--transition);
+}
+
+.beer-card:hover,
+.event-card:hover,
+.menu-category:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+.drink-category:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(201, 169, 97, 0.3);
+}
+
+/* Gallery item sophisticated hover */
+.gallery-item {
+    transition: var(--transition);
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.gallery-item img {
+    transition: var(--transition-slow);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* Button sophisticated effects */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-fast);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Navigation link sophisticated animation */
+.nav-link {
+    position: relative;
+    transition: var(--transition-fast);
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+    transform: translateX(-50%);
+    transition: var(--transition);
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--primary-gold);
+}
+
+.navbar.scrolled .nav-link:hover {
+    color: var(--primary-gold);
+}
+
+/* WhatsApp float pulse animation */
+.whatsapp-float {
+    animation: pulseGlow 2s ease-in-out infinite;
+    transition: var(--transition-fast);
+}
+
+.whatsapp-float:hover {
+    animation: none;
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Form input focus effect */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Stat numbers count animation */
+.stat-number {
+    transform-origin: center;
+    transition: var(--transition);
+}
+
+.stat-item:hover .stat-number {
+    transform: scale(1.1);
+    color: var(--dark-gray);
+}
+
+/* About image sophisticated hover */
+.about-image {
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.about-image img {
+    transition: var(--transition-slow);
+}
+
+.about-image:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.05);
+}
+
+.about-badge {
+    transition: var(--transition);
+}
+
+.about-image:hover .about-badge {
+    transform: scale(1.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+/* Mission card hover effect */
+.mission-card {
+    transition: var(--transition);
+}
+
+.mission-card:hover {
+    transform: translateX(10px);
+}
+
+.mission-card:hover i {
+    transform: scale(1.2) rotate(10deg);
+    transition: var(--transition);
+}
+
+/* FAQ smooth expansion */
+.faq-answer {
+    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    transition: max-height 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Contact method hover animation */
+.contact-method {
+    transform-origin: left;
+    transition: var(--transition-fast);
+}
+
+.contact-method:hover {
+    transform: translateX(10px);
+}
+
+/* Footer links smooth animation */
+.footer-links a {
+    position: relative;
+    transition: var(--transition-fast);
+}
+
+.footer-links a::before {
+    content: '→';
+    position: absolute;
+    left: -15px;
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+    left: -20px;
+}
+
+/* Social links rotation on hover */
+.social-links a {
+    transition: var(--transition-fast);
+}
+
+.social-links a:hover {
+    transform: translateY(-5px) rotate(360deg);
+}
+
+/* Image loading effect */
+img {
+    opacity: 1;
+    transition: opacity 0.6s ease-out;
+}
+
+img:not([src]) {
+    opacity: 0;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section reveal on scroll - adds class via JS */
+.section-padding.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: var(--transition-slow);
+}
+
+.section-padding.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ========================================

@@ -73,6 +73,7 @@ try {
 // Import admin routes
 const adminRoutes = require('./routes/admin');
 const menuController = require('./controllers/menuController');
+const galleryController = require('./controllers/galleryController');
 
 // Admin routes (protected)
 app.use('/api/admin', adminRoutes);
@@ -80,6 +81,9 @@ app.use('/api/admin', adminRoutes);
 // Public routes
 // Menu public route
 app.get('/api/menu', menuController.getMenuByCategory);
+
+// Gallery public route
+app.get('/api/gallery', galleryController.getAllImages);
 
 // Home route
 app.get('/', (req, res) => {
