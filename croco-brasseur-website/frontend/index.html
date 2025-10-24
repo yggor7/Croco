@@ -6,19 +6,247 @@
     <meta name="description" content="Le Croco Brasseur - Bujumbura's Global Gastro-Brewpub. Craft beers, world-class cuisine, and unforgettable experiences.">
     <title>Le Croco Brasseur | Bujumbura's Premier Gastro-Brewpub</title>
     
+    <!-- Preload Critical CSS -->
+    <link rel="preload" href="css/style.css" as="style">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS Animation -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+    <!-- Font Awesome - Defer non-critical -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+
+    <!-- AOS Animation - Defer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" media="print" onload="this.media='all'">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* EFFET CENTURY BAR SUR LES SECTIONS */
+        
+        /* Hero reste avec la vidéo */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .hero-video video,
+        .hero-video img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .hero-content .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .hero-content .btn-outline:hover {
+            background: white;
+            color: var(--dark-gray);
+        }
+        
+        /* Sections avec photos fixes en arrière-plan */
+        .parallax-section {
+            position: relative;
+            min-height: 80vh;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .section-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            width: 100%;
+        }
+
+        .section-content .section-subtitle,
+        .section-content .section-title,
+        .section-content .welcome-text,
+        .section-content p {
+            color: white !important;
+        }
+
+        .section-content .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .section-content .btn-outline:hover {
+            background: var(--primary-gold);
+            color: var(--dark-gray);
+        }
+        
+        /* Grille showcase avec effet Century Bar */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-gap: 0;
+            min-height: 80vh;
+        }
+        
+        .showcase-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .showcase-slider {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .showcase-slider-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.8) contrast(1.1);
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+        }
+
+        .showcase-slider-item.active {
+            opacity: 1;
+        }
+
+        .showcase-item:hover .showcase-slider-item.active {
+            transform: scale(1.05);
+            transition: transform 0.8s ease, opacity 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+        }
+        
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 20px;
+            background: linear-gradient(transparent 0%, rgba(0,0,0,0.9) 100%);
+            color: white;
+            transform: translateY(20px);
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-overlay h3,
+        .showcase-overlay p {
+            color: white !important;
+        }
+
+        .showcase-item:hover .showcase-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Lignes de séparation style Century Bar */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #b8860b 50%, transparent 100%);
+            margin: 60px 0;
+        }
+        
+        .hero-badge::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: #b8860b;
+            margin: 20px auto;
+        }
+        
+        /* Typographie Century Bar */
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        
+        .section-subtitle {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b8860b;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        /* Welcome Section avec fond uni (zone de repos) */
+        .welcome-section {
+            background: #0a0a0a;
+            padding: 100px 0;
+        }
+        
+        .welcome-section .section-title {
+            color: white;
+        }
+        
+        .welcome-text {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+    </style>
 </head>
 <body>
     <!-- Loader -->
@@ -38,19 +266,18 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="assets/images/logo.png" alt="Le Croco Brasseur Logo" id="logo-img">
-                <span class="logo-text">LE CROCO BRASSEUR</span>
-            </div>
+            </a>
             
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html#accueil" class="nav-link active">Accueil</a></li>
-                <li><a href="index.html#apropos" class="nav-link">À Propos</a></li>
-                <li><a href="index.html#brasserie" class="nav-link">Brasserie</a></li>
+                <li><a href="index.html" class="nav-link active">Accueil</a></li>
+                <li><a href="pages/apropos.html" class="nav-link">À Propos</a></li>
+                <li><a href="/pages/brasserie.html" class="nav-link">Brasserie</a></li>
                 <li><a href="pages/menu.html" class="nav-link">Menu</a></li>
                 <li><a href="pages/events.html" class="nav-link">Événements</a></li>
-                <li><a href="index.html#galerie" class="nav-link">Galerie</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="pages/galerie.html" class="nav-link">Galerie</a></li>
+                <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
             </ul>
             
             <div class="nav-actions">
@@ -66,12 +293,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <!-- Hero Section -->
+    <!-- Hero Section avec vidéo (inchangée) -->
     <section class="hero" id="accueil">
         <div class="hero-video">
             <!-- Option 1: Vidéo (si disponible) -->
-                <video autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline>
                 <source src="assets/videos/hero-video.mp4" type="video/mp4">
             </video> 
             
@@ -91,6 +317,7 @@
                 <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
                     Craft Beer • World-Class Cuisine • Unforgettable Experiences
                 </p>
+
                 <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
                     <a href="#reservation" class="btn btn-primary btn-lg">
                         <i class="fas fa-calendar-check"></i> Réserver une Table
@@ -99,7 +326,7 @@
                         <i class="fas fa-beer"></i> Découvrir
                     </a>
                 </div>
-                
+
                 <div class="hero-info" data-aos="fade-up" data-aos-delay="600">
                     <div class="info-item">
                         <i class="fas fa-clock"></i>
@@ -132,7 +359,29 @@
         </div>
     </section>
 
-    <!-- Welcome Section -->
+    <div class="section-divider"></div>
+
+    <!-- Section Parallax 1 - Ambiance -->
+    <section class="parallax-section" style="background-image: url('./assets/images/gallery/interior-1.jpg');">
+        <div class="section-overlay"></div>
+        <div class="container section-content text-center">
+            <div data-aos="fade-up">
+                <span class="section-subtitle">L'Expérience</span>
+                <h2 class="section-title">Une Ambiance Unique à Bujumbura</h2>
+                <p class="welcome-text">
+                    Découvrez un cadre chaleureux où l'art de la bière rencontre l'excellence culinaire. 
+                    Un lieu de rencontre et de détente au cœur de la ville.
+                </p>
+                <a href="pages/galerie.html" class="btn btn-outline btn-lg">
+                    <i class="fas fa-images"></i> Voir la Galerie
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Welcome Section (zone de repos) -->
     <section class="welcome-section section-padding">
         <div class="container">
             <div class="welcome-content text-center" data-aos="fade-up">
@@ -166,733 +415,52 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about-section section-padding" id="apropos">
-        <div class="container">
-            <div class="section-grid">
-                <div class="about-image" data-aos="fade-right">
-                    <img src="assets/images/about-img.jpg" alt="Le Croco Brasseur Interior">
-                    <div class="about-badge">
-                        <i class="fas fa-award"></i>
-                        <div class="badge-content">
-                            <span class="badge-text">East Africa's Leading<br>Gastro-Brewpub</span>
-                        </div>
-                    </div>
+    <div class="section-divider"></div>
+
+    <!-- Visual Showcase Section -->
+    <section class="visual-showcase">
+        <div class="showcase-grid">
+            <div class="showcase-item large" data-aos="fade-up" data-category="interieur">
+                <div class="showcase-slider"></div>
+                <div class="showcase-overlay">
+                    <h3>Ambiance Unique</h3>
+                    <p>Un cadre chaleureux et moderne</p>
                 </div>
-                
-                <div class="about-content" data-aos="fade-left">
-                    <span class="section-subtitle">Notre Histoire</span>
-                    <h2 class="section-title">A Bold Vision Born in Bujumbura</h2>
-                    <p class="about-text">
-                        Croco Brasseur is the story of a passion for great beer, delicious food, and good times. 
-                        Our establishment is designed to be a crossroads where friendliness, culinary art, and 
-                        festive vibes come together.
-                    </p>
-                    <p class="about-text">
-                        Our name, <strong>Le Croco</strong>, honors the legendary crocodiles of Lake Tanganyika — 
-                        a symbol of strength, heritage, and wild beauty. Inspired by both global trends and local 
-                        roots, our team blends world-class flavors with the familiar rhythms of Bujumbura.
-                    </p>
-                    
-                    <div class="values-grid">
-                        <div class="value-item">
-                            <i class="fas fa-beer"></i>
-                            <h4>Craftsmanship</h4>
-                            <p>Excellence in brewing and culinary artistry</p>
-                        </div>
-                        <div class="value-item">
-                            <i class="fas fa-heart"></i>
-                            <h4>Authenticity</h4>
-                            <p>Rooted locally, enriched globally</p>
-                        </div>
-                        <div class="value-item">
-                            <i class="fas fa-users"></i>
-                            <h4>Hospitality</h4>
-                            <p>Warm, personalized experiences</p>
-                        </div>
-                        <div class="value-item">
-                            <i class="fas fa-star"></i>
-                            <h4>Quality</h4>
-                            <p>Premium ingredients, uncompromising standards</p>
-                        </div>
-                    </div>
+            </div>
+            <div class="showcase-item" data-aos="fade-up" data-aos-delay="100" data-category="beers">
+                <div class="showcase-slider"></div>
+                <div class="showcase-overlay">
+                    <h3>Bières Artisanales</h3>
+                    <p>Brassées sur place</p>
+                </div>
+            </div>
+            <div class="showcase-item" data-aos="fade-up" data-aos-delay="200" data-category="food">
+                <div class="showcase-slider"></div>
+                <div class="showcase-overlay">
+                    <h3>Cuisine d'Exception</h3>
+                    <p>Saveurs du monde</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission Vision Section -->
-    <section class="mission-section">
-        <div class="container">
-            <div class="mission-grid">
-                <div class="mission-card" data-aos="fade-up">
-                    <i class="fas fa-eye"></i>
-                    <h3>Vision</h3>
-                    <p>To be East Africa's leading gastro-brewpub—fusing global flavors, craft brewing, 
-                    and local culture in a vibrant, inclusive setting.</p>
-                </div>
-                <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-bullseye"></i>
-                    <h3>Mission</h3>
-                    <p>Le Croco Brasserie delivers world-class craft beer and globally inspired cuisine. 
-                    We combine international quality with East African hospitality to create exceptional 
-                    dining and cultural experiences.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="section-divider"></div>
 
-    <!-- Brewery Section -->
-    <section class="brewery-section section-padding" id="brasserie">
-        <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <span class="section-subtitle">Notre Brasserie</span>
-                <h2 class="section-title">Craft Beers Brewed with Passion</h2>
-                <p class="section-description">
-                    Following time-honored German brewing techniques with Belgian-style influences
+    <!-- Section Parallax 2 - Bières -->
+    <section class="parallax-section" style="background-image: url('./assets/images/gallery/beer-taps.jpg');">
+        <div class="section-overlay"></div>
+        <div class="container section-content text-center">
+            <div data-aos="fade-up">
+                <span class="section-subtitle">Notre Passion</span>
+                <h2 class="section-title">Bières Artisanales Brassées sur Place</h2>
+                <p class="welcome-text">
+                    Découvrez nos 15+ bières artisanales, créées avec passion et expertise. 
+                    De la blonde rafraîchissante à la stout robuste, il y en a pour tous les goûts.
                 </p>
+                <a href="pages/brasserie.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-beer"></i> Découvrir nos Bières
+                </a>
             </div>
-            
-            <div class="brewery-grid">
-                <div class="brewery-feature" data-aos="fade-up">
-                    <div class="feature-icon">
-                        <i class="fas fa-beer"></i>
-                    </div>
-                    <h3>German Tradition</h3>
-                    <p>Brewed on-site with precision and passion, following authentic German techniques</p>
-                </div>
-                
-                <div class="brewery-feature" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-icon">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <h3>Belgian Influence</h3>
-                    <p>Selected seasonal batches featuring Belgian-style brewing artistry</p>
-                </div>
-                
-                <div class="brewery-feature" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-icon">
-                        <i class="fas fa-glass-cheers"></i>
-                    </div>
-                    <h3>Fresh & Cold</h3>
-                    <p>From crisp lagers to hoppy ales and rich dark brews, served at perfection</p>
-                </div>
-            </div>
-            
-            <div class="beers-showcase" data-aos="fade-up">
-                <h3 class="showcase-title">Our Signature Brews</h3>
-                <div class="beers-grid">
-                    <div class="beer-card">
-                        <div class="beer-icon">🍺</div>
-                        <h4>Croco Lager</h4>
-                        <p class="beer-type">Crisp & Refreshing</p>
-                        <p class="beer-desc">Light golden lager, perfect for hot days</p>
-                        <span class="beer-abv">4.8% ABV</span>
-                    </div>
-                    
-                    <div class="beer-card">
-                        <div class="beer-icon">🍻</div>
-                        <h4>Tanganyika IPA</h4>
-                        <p class="beer-type">Hoppy & Bold</p>
-                        <p class="beer-desc">Citrus notes with a hoppy finish</p>
-                        <span class="beer-abv">6.2% ABV</span>
-                    </div>
-                    
-                    <div class="beer-card">
-                        <div class="beer-icon">🥃</div>
-                        <h4>Dark Croco</h4>
-                        <p class="beer-type">Rich & Smooth</p>
-                        <p class="beer-desc">Coffee and chocolate notes</p>
-                        <span class="beer-abv">5.5% ABV</span>
-                    </div>
-                    
-                    <div class="beer-card">
-                        <div class="beer-icon">🍺</div>
-                        <h4>Amber Ale</h4>
-                        <p class="beer-type">Balanced & Malty</p>
-                        <p class="beer-desc">Smooth amber with caramel hints</p>
-                        <span class="beer-abv">5.2% ABV</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Menu Section -->
-    <section class="menu-section section-padding" id="menu">
-        <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <span class="section-subtitle">Notre Menu</span>
-                <h2 class="section-title">Cosmopolitan Cuisine</h2>
-                <p class="section-description">
-                    A modern blend of international pub fare and regional African flavors
-                </p>
-            </div>
-            
-            <div class="menu-categories" data-aos="fade-up" data-aos-delay="200">
-                <div class="menu-category">
-                    <div class="category-icon">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <h3>Brunch & More</h3>
-                    <ul class="menu-list">
-                        <li><strong>Hearty Breakfasts</strong> <span>Start Right</span></li>
-                        <li><strong>Boozy Brunches</strong> <span>Weekend Special</span></li>
-                        <li><strong>Vegetarian Options</strong> <span>Fresh & Delicious</span></li>
-                        <li><strong>Daily Specials</strong> <span>Chef's Creation</span></li>
-                        <li><strong>Fusion Creations</strong> <span>Innovative Dishes</span></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Drinks Section -->
-            <div class="drinks-section" data-aos="fade-up">
-                <h3 class="showcase-title">Beyond Beer</h3>
-                <div class="drinks-grid">
-                    <div class="drink-category">
-                        <i class="fas fa-wine-bottle"></i>
-                        <h4>Premium Wines</h4>
-                        <p>French, South African & German selections</p>
-                    </div>
-                    <div class="drink-category">
-                        <i class="fas fa-cocktail"></i>
-                        <h4>Signature Cocktails</h4>
-                        <p>Tanganyika Sunset, Mojito with local herbs</p>
-                    </div>
-                    <div class="drink-category">
-                        <i class="fas fa-glass-whiskey"></i>
-                        <h4>Premium Spirits</h4>
-                        <p>Handpicked collection for connoisseurs</p>
-                    </div>
-                    <div class="drink-category">
-                        <i class="fas fa-lemon"></i>
-                        <h4>Fresh & Healthy</h4>
-                        <p>Mocktails, fresh juices, natural sodas</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Events Section -->
-    <section class="events-section section-padding" id="evenements">
-        <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <span class="section-subtitle">Événements</span>
-                <h2 class="section-title">The Croco Experience</h2>
-                <p class="section-description">
-                    Live music, entertainment, and unforgettable nights
-                </p>
-            </div>
-            
-            <div class="events-grid">
-                <div class="event-card featured" data-aos="fade-up">
-                    <div class="event-badge">Chaque Lundi</div>
-                    <div class="event-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3>Karaoke Night</h3>
-                    <p class="event-time">19h00 - 23h00</p>
-                    <p class="event-description">
-                        Chantez vos chansons préférées dans une ambiance conviviale. 
-                        La scène vous appartient!
-                    </p>
-                    <a href="#reservation" class="btn btn-outline">Réserver</a>
-                </div>
-                
-                <div class="event-card featured" data-aos="fade-up" data-aos-delay="200">
-                    <div class="event-badge">Chaque Samedi</div>
-                    <div class="event-icon">
-                        <i class="fas fa-guitar"></i>
-                    </div>
-                    <h3>Open Mic Night</h3>
-                    <p class="event-time">20h00 - 23h30</p>
-                    <p class="event-description">
-                        Talents musicaux, poésie, stand-up — partagez votre art avec nous!
-                    </p>
-                    <a href="#reservation" class="btn btn-outline">Réserver</a>
-                </div>
-                
-                <div class="event-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="event-badge">Dimanche</div>
-                    <div class="event-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>Sunday Brunch</h3>
-                    <p class="event-time">10h00 - 15h00</p>
-                    <p class="event-description">
-                        Brunch gourmand avec musique live et cocktails
-                    </p>
-                    <a href="#reservation" class="btn btn-outline">Réserver</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Private Events Section -->
-    <section class="private-events-section">
-        <div class="container">
-            <div class="events-content-grid">
-                <div class="events-image" data-aos="fade-right">
-                    <img src="assets/images/event-space.jpg" alt="Private Event Space">
-                </div>
-                
-                <div class="events-content" data-aos="fade-left">
-                    <span class="section-subtitle">Événements Privés</span>
-                    <h2 class="section-title">Your Perfect Venue</h2>
-                    <p>
-                        Le Croco is the perfect venue for both casual and upscale gatherings. 
-                        We create unforgettable moments tailored to your vision.
-                    </p>
-                    
-                    <div class="event-types">
-                        <div class="event-type-item">
-                            <i class="fas fa-briefcase"></i>
-                            <div>
-                                <h4>Corporate Events</h4>
-                                <p>Team buildings, product launches, business lunches, conferences</p>
-                            </div>
-                        </div>
-                        
-                        <div class="event-type-item">
-                            <i class="fas fa-glass-cheers"></i>
-                            <div>
-                                <h4>Private Celebrations</h4>
-                                <p>Weddings, birthdays, graduations, bachelorettes</p>
-                            </div>
-                        </div>
-                        
-                        <div class="event-type-item">
-                            <i class="fas fa-star"></i>
-                            <div>
-                                <h4>Custom Experiences</h4>
-                                <p>Beer tastings, chef's table dinners, special occasions</p>
-                            </div>
-                        </div>
-                        
-                        <div class="event-type-item">
-                            <i class="fas fa-truck"></i>
-                            <div>
-                                <h4>Outside Catering</h4>
-                                <p>Professional catering for your off-site events</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-envelope"></i> Demander un Devis
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery-section section-padding" id="galerie">
-        <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <span class="section-subtitle">Galerie</span>
-                <h2 class="section-title">Discover Our World</h2>
-            </div>
-            
-            <div class="gallery-filters" data-aos="fade-up" data-aos-delay="200">
-                <button class="filter-btn active" data-filter="all">Tout</button>
-                <button class="filter-btn" data-filter="interieur">Intérieur</button>
-                <button class="filter-btn" data-filter="food">Cuisine</button>
-                <button class="filter-btn" data-filter="beers">Bières</button>
-                <button class="filter-btn" data-filter="events">Événements</button>
-            </div>
-            
-            <div class="gallery-grid" data-aos="fade-up" data-aos-delay="400">
-                <div class="gallery-item" data-category="interieur">
-                    <img src="assets/images/gallery/interior-1.jpg" alt="Restaurant Interior">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Ambiance Chaleureuse</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="food">
-                    <img src="assets/images/gallery/nyama-choma.jpg" alt="Nyama Choma">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Nyama Choma</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="beers">
-                    <img src="assets/images/gallery/beer-taps.jpg" alt="Beer Taps">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Fresh Craft Beers</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="food">
-                    <img src="assets/images/gallery/burger.jpg" alt="Gourmet Burger">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Gourmet Burgers</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="events">
-                    <img src="assets/images/gallery/karaoke.jpg" alt="Karaoke Night">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Karaoke Night</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="interieur">
-                    <img src="assets/images/gallery/bar-area.jpg" alt="Bar Area">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Bar Premium</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="food">
-                    <img src="assets/images/gallery/pizza.jpg" alt="Artisan Pizza">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Pizzas Artisanales</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="beers">
-                    <img src="assets/images/gallery/beer-flight.jpg" alt="Beer Selection">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <p>Beer Selection</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reservation Section -->
-    <section class="reservation-section section-padding" id="reservation">
-        <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <span class="section-subtitle">Réservation</span>
-                <h2 class="section-title">Book Your Experience</h2>
-                <p class="section-description">
-                    Réservez votre table ou contactez-nous pour un événement privé
-                </p>
-            </div>
-            
-            <div class="reservation-grid">
-                <div class="reservation-info" data-aos="fade-right">
-                    <h3>Pourquoi Réserver?</h3>
-                    <ul class="benefits-list">
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Garantissez votre table aux heures de pointe</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Demandes spéciales accommodées</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Service prioritaire</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <span>Confirmation immédiate</span>
-                        </li>
-                    </ul>
-                    
-                    <div class="contact-methods">
-                        <h4>Ou Contactez-Nous Directement:</h4>
-                        <a href="tel:+25776313132" class="contact-method">
-                            <i class="fas fa-phone"></i>
-                            <span>+257 76 31 31 32</span>
-                        </a>
-                        <a href="https://wa.me/25776313132" class="contact-method" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>WhatsApp</span>
-                        </a>
-                        <a href="mailto:info@croco-brasseur.com" class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <span>info@croco-brasseur.com</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="reservation-form-container" data-aos="fade-left">
-                    <form id="reservation-form" class="reservation-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="prenom">Prénom *</label>
-                                <input type="text" id="prenom" name="prenom" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="nom">Nom *</label>
-                                <input type="text" id="nom" name="nom" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="telephone">Téléphone *</label>
-                                <input type="tel" id="telephone" name="telephone" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="date">Date *</label>
-                                <input type="date" id="date" name="date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="heure">Heure *</label>
-                                <select id="heure" name="heure" required>
-                                    <option value="">Choisir...</option>
-                                    <option value="12:00">12:00</option>
-                                    <option value="12:30">12:30</option>
-                                    <option value="13:00">13:00</option>
-                                    <option value="13:30">13:30</option>
-                                    <option value="14:00">14:00</option>
-                                    <option value="18:00">18:00</option>
-                                    <option value="18:30">18:30</option>
-                                    <option value="19:00">19:00</option>
-                                    <option value="19:30">19:30</option>
-                                    <option value="20:00">20:00</option>
-                                    <option value="20:30">20:30</option>
-                                    <option value="21:00">21:00</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="personnes">Nombre de Personnes *</label>
-                                <select id="personnes" name="personnes" required>
-                                    <option value="">Choisir...</option>
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                    <option value="5">5 personnes</option>
-                                    <option value="6">6 personnes</option>
-                                    <option value="7">7 personnes</option>
-                                    <option value="8">8 personnes</option>
-                                    <option value="9+">9+ personnes</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="occasion">Occasion</label>
-                                <select id="occasion" name="occasion">
-                                    <option value="">Sélectionner...</option>
-                                    <option value="Dîner classique">Dîner classique</option>
-                                    <option value="Anniversaire">Anniversaire</option>
-                                    <option value="Business">Repas d'affaires</option>
-                                    <option value="Célébration">Célébration</option>
-                                    <option value="Autre">Autre</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Demandes Spéciales</label>
-                            <textarea id="message" name="message" rows="3" placeholder="Allergies, préférences de table, etc..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fas fa-calendar-check"></i> Confirmer la Réservation
-                        </button>
-                        
-                        <p class="form-note">
-                            * Champs obligatoires. Vous recevrez une confirmation par email et WhatsApp.
-                        </p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section section-padding">
-        <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <span class="section-subtitle">FAQ</span>
-                <h2 class="section-title">Questions Fréquentes</h2>
-            </div>
-            
-            <div class="faq-grid" data-aos="fade-up" data-aos-delay="200">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h4>Quels sont vos horaires d'ouverture?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Nous sommes ouverts tous les jours de 6h30 jusqu'à tard dans la nuit, y compris les weekends.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h4>Proposez-vous des réservations de groupe?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Oui! Vous pouvez réserver pour des groupes, événements privés ou fonctions corporate. 
-                        Contactez-nous à l'avance pour planifier votre visite.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h4>Avez-vous des options végétariennes et sans alcool?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Absolument! Nous proposons des mocktails, jus naturels, et plusieurs plats végétariens délicieux.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h4>Quand sont le karaoke et l'open mic?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p><strong>Karaoke:</strong> Chaque lundi soir<br>
-                        <strong>Open Mic:</strong> Chaque samedi soir</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h4>Où êtes-vous situés exactement?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>20, Boulevard de l'Uprona, Rohero, Bujumbura Mairie. Nous sommes facilement accessibles en plein cœur de Bujumbura.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h4>Peut-on privatiser le lieu?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Oui, selon disponibilité. N'hésitez pas à nous contacter pour plus de détails sur la privatisation.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section section-padding" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info" data-aos="fade-right">
-                    <span class="section-subtitle">Contact</span>
-                    <h2 class="section-title">Get in Touch</h2>
-                    <p>Des questions? Envie de faire une réservation? Curieux de découvrir notre univers?</p>
-                    <p>L'équipe Croco Brasseur est là pour vous!</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-detail">
-                            <div class="detail-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4>Adresse</h4>
-                                <p>20, Boulevard de l'Uprona<br>Rohero, Bujumbura Mairie</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-detail">
-                            <div class="detail-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4>Téléphone</h4>
-                                <p>+257 76 31 31 32<br>Lundi - Dimanche, 6h30 - Tard</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-detail">
-                            <div class="detail-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>info@croco-brasseur.com<br>contact@lecrocobrasseur.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-detail">
-                            <div class="detail-icon">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <div>
-                                <h4>Social Media</h4>
-                                <p><a href="https://instagram.com/lecrocobrasseur" target="_blank">@Le Croco Brasseur</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form-container" data-aos="fade-left">
-                    <form id="contact-form" class="contact-form">
-                        <div class="form-group">
-                            <label for="contact-nom">Nom Complet *</label>
-                            <input type="text" id="contact-nom" name="nom_complet" required>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="contact-email">Email *</label>
-                                <input type="email" id="contact-email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-tel">Téléphone</label>
-                                <input type="tel" id="contact-tel" name="telephone">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="contact-sujet">Sujet *</label>
-                            <input type="text" id="contact-sujet" name="sujet" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="contact-message">Message *</label>
-                            <textarea id="contact-message" name="message" rows="5" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fas fa-paper-plane"></i> Envoyer le Message
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="map-section">
-        <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.624!2d29.36!3d-3.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMjInNDguMCJTIDI5wrAyMSczNi4wIkU!5e0!3m2!1sen!2sbi!4v1234567890" 
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
         </div>
     </section>
 
@@ -922,22 +490,22 @@
                 <div class="footer-col">
                     <h4>Navigation</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#accueil">Accueil</a></li>
-                        <li><a href="index.html#apropos">À Propos</a></li>
-                        <li><a href="index.html#brasserie">Brasserie</a></li>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="pages/apropos.html">À Propos</a></li>
+                        <li><a href="pages/brasserie.html">Brasserie</a></li>
                         <li><a href="pages/menu.html">Menu</a></li>
                         <li><a href="pages/events.html">Événements</a></li>
-                        <li><a href="index.html#galerie">Galerie</a></li>
+                        <li><a href="pages/galerie.html">Galerie</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h4>Services</h4>
                     <ul class="footer-links">
-                        <li><a href="#reservation">Réservations</a></li>
+                        <li><a href="index.html#reservation">Réservations</a></li>
                         <li><a href="pages/events.html">Événements Privés</a></li>
-                        <li><a href="#contact">Catering</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="pages/contact.html">Catering</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -949,8 +517,8 @@
                     </p>
                     <p class="hours-text">
                         <strong>Événements Spéciaux:</strong><br>
-                        Lundi: Karaoke (19h)<br>
-                        Samedi: Open Mic (20h)<br>
+                        Lundi: Open Mic (19h)<br>
+                        Samedi: Karaoke (20h)<br>
                         Dimanche: Brunch (10h-15h)
                     </p>
                 </div>
@@ -963,37 +531,9 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/booking.js"></script>
+    <!-- Scripts - Deferred for better performance -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/booking.js" defer></script>
 </body>
 </html>
-                    <div class="category-icon">
-                        <i class="fas fa-drumstick-bite"></i>
-                    </div>
-                    <h3>Grills & African Favorites</h3>
-                    <ul class="menu-list">
-                        <li><strong>Nyama Choma</strong> <span>House Specialty</span></li>
-                        <li><strong>Braai</strong> <span>South African BBQ</span></li>
-                        <li><strong>Fresh Lake Fish</strong> <span>From Tanganyika</span></li>
-                        <li><strong>Brochettes</strong> <span>Skewered Perfection</span></li>
-                        <li><strong>Grilled Plantains</strong> <span>Sweet & Savory</span></li>
-                    </ul>
-                </div>
-                
-                <div class="menu-category">
-                    <div class="category-icon">
-                        <i class="fas fa-hamburger"></i>
-                    </div>
-                    <h3>International Favorites</h3>
-                    <ul class="menu-list">
-                        <li><strong>Gourmet Burgers</strong> <span>Juicy & Loaded</span></li>
-                        <li><strong>Artisan Pizzas</strong> <span>Wood-Fired</span></li>
-                        <li><strong>Tapas Selection</strong> <span>Shareables</span></li>
-                        <li><strong>Spicy Fried Chicken</strong> <span>Crispy & Bold</span></li>
-                        <li><strong>Elevated Bar Snacks</strong> <span>Perfect with Beer</span></li>
-                    </ul>
-                </div>
-                
-                <div class="menu-category">

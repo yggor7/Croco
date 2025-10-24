@@ -200,3 +200,160 @@ async function deleteImage(id, titre) {
         showNotification('Erreur lors de la suppression', 'error');
     }
 }
+
+// ========================================
+// BULK UPLOAD FUNCTIONS
+// ========================================
+
+let bulkFilesArray = [];
+
+function openBulkUploadModal() {
+    document.getElementById('bulkUploadModal').classList.add('active');
+    bulkFilesArray = [];
+    document.getElementById('bulkFiles').value = '';
+    document.getElementById('bulkCategory').value = '';
+    document.getElementById('bulkActif').checked = true;
+    document.getElementById('bulkPreviewContainer').style.display = 'none';
+    document.getElementById('uploadProgress').style.display = 'none';
+}
+
+function closeBulkUploadModal() {
+    document.getElementById('bulkUploadModal').classList.remove('active');
+    bulkFilesArray = [];
+}
+
+function previewBulkImages(event) {
+    const files = Array.from(event.target.files);
+    bulkFilesArray = files;
+
+    if (files.length === 0) {
+        document.getElementById('bulkPreviewContainer').style.display = 'none';
+        return;
+    }
+
+    document.getElementById('bulkPreviewContainer').style.display = 'block';
+    document.getElementById('fileCount').textContent = files.length;
+    document.getElementById('uploadCount').textContent = `(${files.length})`;
+
+    const previewGrid = document.getElementById('bulkPreviewGrid');
+    previewGrid.innerHTML = '';
+
+    files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const div = document.createElement('div');
+            div.className = 'bulk-preview-item';
+            div.innerHTML = `
+                <img src="${e.target.result}" alt="Preview">
+                <button class="remove-btn" onclick="removeBulkFile(${index})" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            previewGrid.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function removeBulkFile(index) {
+    bulkFilesArray.splice(index, 1);
+
+    // Update file input
+    const dataTransfer = new DataTransfer();
+    bulkFilesArray.forEach(file => dataTransfer.items.add(file));
+    document.getElementById('bulkFiles').files = dataTransfer.files;
+
+    // Refresh preview
+    previewBulkImages({ target: { files: bulkFilesArray } });
+}
+
+async function bulkUploadImages() {
+    try {
+        const category = document.getElementById('bulkCategory').value;
+        const actif = document.getElementById('bulkActif').checked;
+
+        if (!category) {
+            showNotification('Veuillez sélectionner une catégorie', 'error');
+            return;
+        }
+
+        if (bulkFilesArray.length === 0) {
+            showNotification('Veuillez sélectionner au moins une image', 'error');
+            return;
+        }
+
+        // Show progress
+        document.getElementById('uploadProgress').style.display = 'block';
+        document.getElementById('bulkUploadBtn').disabled = true;
+
+        const total = bulkFilesArray.length;
+        let uploaded = 0;
+        let failed = 0;
+
+        for (let i = 0; i < bulkFilesArray.length; i++) {
+            const file = bulkFilesArray[i];
+
+            try {
+                // Generate auto title from filename if not provided
+                const fileName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+                const autoTitle = `${category}-${Date.now()}-${i}`;
+
+                const formData = new FormData();
+                formData.append('image', file);
+                formData.append('titre', autoTitle); // Auto-generated title
+                formData.append('description', ''); // No description
+                formData.append('category', category);
+                formData.append('ordre', i); // Auto order
+                formData.append('actif', actif);
+
+                const token = getAuthToken();
+                const response = await fetch('http://localhost:3000/api/admin/gallery', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    uploaded++;
+                } else {
+                    failed++;
+                    console.error(`Failed to upload ${file.name}:`, data.message);
+                }
+
+            } catch (error) {
+                failed++;
+                console.error(`Error uploading ${file.name}:`, error);
+            }
+
+            // Update progress
+            const progress = Math.round(((i + 1) / total) * 100);
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressBar').textContent = progress + '%';
+            document.getElementById('progressText').textContent =
+                `Upload en cours: ${i + 1}/${total} (${uploaded} réussis, ${failed} échoués)`;
+        }
+
+        // Show final result
+        if (failed === 0) {
+            showNotification(`${uploaded} images uploadées avec succès!`, 'success');
+        } else {
+            showNotification(`${uploaded} images uploadées, ${failed} ont échoué`, 'warning');
+        }
+
+        // Reload gallery and close modal
+        await loadGallery();
+        setTimeout(() => {
+            closeBulkUploadModal();
+        }, 1500);
+
+    } catch (error) {
+        console.error('Error in bulk upload:', error);
+        showNotification('Erreur lors de l\'upload multiple', 'error');
+    } finally {
+        document.getElementById('bulkUploadBtn').disabled = false;
+    }
+}

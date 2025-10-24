@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galerie Photos - Découvrez notre univers en images">
+    <title>Galerie - Le Croco Brasseur | Bujumbura's Premier Gastro-Brewpub</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.png" alt="Le Croco Brasseur Logo">
+            </a>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link">Accueil</a></li>
+                <li><a href="apropos.html" class="nav-link">À Propos</a></li>
+                <li><a href="brasserie.html" class="nav-link">Brasserie</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="events.html" class="nav-link">Événements</a></li>
+                <li><a href="galerie.html" class="nav-link active">Galerie</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="../index.html#reservation" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Réserver
+                </a>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/25776313132?text=Bonjour%20Le%20Croco%20Brasseur"
+       class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Hero Section -->
+    <section class="page-hero" style="background-image: url('../assets/images/gallery/bar-area.jpg');">
+        <div class="page-hero-content">
+            <h1>Galerie Photos</h1>
+            <p>Discover Our World</p>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section section-padding" id="galerie">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Galerie</span>
+                <h2 class="section-title">Discover Our World</h2>
+            </div>
+
+            <div class="gallery-filters" data-aos="fade-up" data-aos-delay="200">
+                <button class="filter-btn active" data-filter="all">Tout</button>
+                <button class="filter-btn" data-filter="interieur">Intérieur</button>
+                <button class="filter-btn" data-filter="food">Cuisine</button>
+                <button class="filter-btn" data-filter="beers">Bières</button>
+                <button class="filter-btn" data-filter="events">Événements</button>
+            </div>
+
+            <div class="gallery-grid" data-aos="fade-up" data-aos-delay="400">
+                <div class="gallery-item" data-category="interieur">
+                    <img src="../assets/images/gallery/interior-1.jpg" alt="Restaurant Interior">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Ambiance Chaleureuse</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="food">
+                    <img src="../assets/images/gallery/nyama-choma.jpg" alt="Nyama Choma">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Nyama Choma</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="beers">
+                    <img src="../assets/images/gallery/beer-taps.jpg" alt="Beer Taps">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Fresh Craft Beers</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="food">
+                    <img src="../assets/images/gallery/burger.jpg" alt="Gourmet Burger">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Gourmet Burgers</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="events">
+                    <img src="../assets/images/gallery/karaoke.jpg" alt="Karaoke Night">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Karaoke Night</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="interieur">
+                    <img src="../assets/images/gallery/bar-area.jpg" alt="Bar Area">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Bar Premium</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="food">
+                    <img src="../assets/images/gallery/pizza.jpg" alt="Artisan Pizza">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Pizzas Artisanales</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="beers">
+                    <img src="../assets/images/gallery/beer-flight.jpg" alt="Beer Selection">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Beer Selection</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="../assets/images/logo.png" alt="Le Croco Brasseur" class="footer-logo">
+                    <p class="footer-tagline">Where Bujumbura Meets the World</p>
+                    <p class="footer-text">
+                        Craft beer, world-class cuisine, and unforgettable experiences in the heart of Bujumbura.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/lecrocobrasseur" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/lecrocobrasseur" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://wa.me/25776313132" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="apropos.html">À Propos</a></li>
+                        <li><a href="brasserie.html">Brasserie</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Événements</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#reservation">Réservations</a></li>
+                        <li><a href="events.html">Événements Privés</a></li>
+                        <li><a href="contact.html">Catering</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Horaires</h4>
+                    <p class="hours-text">
+                        <strong>Tous les jours</strong><br>
+                        6h30 - Tard dans la nuit
+                    </p>
+                    <p class="hours-text">
+                        <strong>Événements Spéciaux:</strong><br>
+                        Lundi: Open Mic (19h)<br>
+                        Samedi: Karaoke (20h)<br>
+                        Dimanche: Brunch (10h-15h)
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Le Croco Brasseur. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart"></i> in Bujumbura</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

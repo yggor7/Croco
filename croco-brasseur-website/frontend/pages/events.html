@@ -237,7 +237,7 @@
         }
 
         .private-events-cta {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-brown) 100%);
+            background: var(--dark-gray);
             padding: 100px 0;
             color: white;
             text-align: center;
@@ -253,6 +253,7 @@
             font-size: 18px;
             max-width: 700px;
             margin: 0 auto 40px;
+            color: rgba(255,255,255,0.9);
         }
 
         .event-types-showcase {
@@ -263,18 +264,19 @@
         }
 
         .event-type-box {
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.3);
             padding: 40px 30px;
             border-radius: 12px;
             text-align: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(184,134,11,0.3);
             transition: all 0.3s ease;
         }
 
         .event-type-box:hover {
-            background: rgba(255,255,255,0.15);
+            background: rgba(184,134,11,0.2);
             transform: translateY(-5px);
+            border-color: var(--primary-gold);
         }
 
         .event-type-box i {
@@ -284,14 +286,16 @@
         }
 
         .event-type-box h4 {
-            color: white;
-            font-size: 22px;
+            color: var(--primary-gold);
+            font-size: 24px;
             margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .event-type-box p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 15px;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
         }
 
         .testimonials-section {
@@ -434,10 +438,9 @@
     <!-- Navigation -->
     <nav class="navbar scrolled" id="navbar">
         <div class="container nav-container">
-            <div class="logo">
+            <a href="../index.html" class="logo">
                 <img src="../assets/images/logo.png" alt="Le Croco Brasseur Logo">
-                <span class="logo-text">LE CROCO BRASSEUR</span>
-            </div>
+            </a>
             
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="../index.html#accueil" class="nav-link">Accueil</a></li>
@@ -445,8 +448,8 @@
                 <li><a href="../index.html#brasserie" class="nav-link">Brasserie</a></li>
                 <li><a href="menu.html" class="nav-link">Menu</a></li>
                 <li><a href="events.html" class="nav-link active">Événements</a></li>
-                <li><a href="../index.html#galerie" class="nav-link">Galerie</a></li>
-                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="galerie.html" class="nav-link">Galerie</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             
             <div class="nav-actions">
@@ -469,25 +472,14 @@
     </a>
 
     <!-- Events Hero -->
-    <section class="events-hero">
-        <div class="container">
-            <h1 data-aos="fade-up">
-                <span class="gradient-text">Événements</span><br>
-                & Expériences
-            </h1>
-            <p data-aos="fade-up" data-aos-delay="200">
-                Musique live, soirées à thème et moments inoubliables au cœur de Bujumbura
-            </p>
-            <div data-aos="fade-up" data-aos-delay="400">
-                <a href="#weekly-events" class="btn btn-primary btn-lg">
-                    <i class="fas fa-calendar-alt"></i> Voir le Programme
-                </a>
-                <a href="#private-events" class="btn btn-outline btn-lg" style="margin-left: 20px;">
-                    <i class="fas fa-glass-cheers"></i> Événements Privés
-                </a>
-            </div>
+    <section class="page-hero" style="background-image: url('../assets/images/gallery/karaoke.jpg');">
+        <div class="page-hero-content">
+            <h1>Événements & Expériences</h1>
+            <p>Musique live, soirées à thème et moments inoubliables au cœur de Bujumbura</p>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Weekly Events Section -->
     <section class="event-details-section" id="weekly-events">
@@ -501,20 +493,51 @@
             </div>
 
             <div class="weekly-events-grid">
-                <!-- Karaoke Night -->
+                <!-- Open Mic Night -->
                 <div class="weekly-event-card" data-aos="fade-up">
                     <div class="weekly-event-header">
                         <div class="weekly-event-icon">
-                            <i class="fas fa-microphone"></i>
+                            <i class="fas fa-guitar"></i>
                         </div>
                         <p class="weekly-event-day">Chaque Lundi</p>
-                        <h3 class="weekly-event-title">Karaoke Night</h3>
+                        <h3 class="weekly-event-title">Open Mic Night</h3>
                         <p class="weekly-event-time">19h00 - 23h00</p>
                     </div>
                     <div class="weekly-event-body">
                         <p class="weekly-event-description">
-                            Montez sur scène et chantez vos chansons préférées! 
-                            Plus de 10,000 titres disponibles en français, anglais, swahili et kirundi. 
+                            La scène est à vous! Musique, poésie, stand-up comedy...
+                            Partagez votre talent avec un public chaleureux. Inscription sur place
+                            à partir de 18h30. Slots de 10-15 minutes.
+                        </p>
+                        <div class="event-highlights" style="margin: 0;">
+                            <h4 style="font-size: 16px; margin-bottom: 15px;">Inclus:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Équipement son & lumière pro</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Instruments disponibles</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Technicien sur place</li>
+                                <li><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Performance libre</li>
+                            </ul>
+                        </div>
+                        <a href="../index.html#reservation" class="btn btn-outline btn-block" style="margin-top: 20px;">
+                            Réserver pour Lundi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Karaoke Night -->
+                <div class="weekly-event-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="weekly-event-header">
+                        <div class="weekly-event-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <p class="weekly-event-day">Chaque Samedi</p>
+                        <h3 class="weekly-event-title">Karaoke Night</h3>
+                        <p class="weekly-event-time">20h00 - 23h30</p>
+                    </div>
+                    <div class="weekly-event-body">
+                        <p class="weekly-event-description">
+                            Montez sur scène et chantez vos chansons préférées!
+                            Plus de 10,000 titres disponibles en français, anglais, swahili et kirundi.
                             Ambiance garantie et public enthousiaste.
                         </p>
                         <div class="event-highlights" style="margin: 0;">
@@ -524,37 +547,6 @@
                                 <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Écrans géants</li>
                                 <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Happy Hour spécial</li>
                                 <li><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Inscription gratuite</li>
-                            </ul>
-                        </div>
-                        <a href="../index.html#reservation" class="btn btn-outline btn-block" style="margin-top: 20px;">
-                            Réserver pour Lundi
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Open Mic Night -->
-                <div class="weekly-event-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="weekly-event-header">
-                        <div class="weekly-event-icon">
-                            <i class="fas fa-guitar"></i>
-                        </div>
-                        <p class="weekly-event-day">Chaque Samedi</p>
-                        <h3 class="weekly-event-title">Open Mic Night</h3>
-                        <p class="weekly-event-time">20h00 - 23h30</p>
-                    </div>
-                    <div class="weekly-event-body">
-                        <p class="weekly-event-description">
-                            La scène est à vous! Musique, poésie, stand-up comedy... 
-                            Partagez votre talent avec un public chaleureux. Inscription sur place 
-                            à partir de 19h30. Slots de 10-15 minutes.
-                        </p>
-                        <div class="event-highlights" style="margin: 0;">
-                            <h4 style="font-size: 16px; margin-bottom: 15px;">Pour les artistes:</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Backline complet</li>
-                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Ingénieur son pro</li>
-                                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Tous styles bienvenus</li>
-                                <li><i class="fas fa-check" style="color: var(--primary-gold); margin-right: 10px;"></i> Boisson offerte aux artistes</li>
                             </ul>
                         </div>
                         <a href="../index.html#reservation" class="btn btn-outline btn-block" style="margin-top: 20px;">
@@ -683,32 +675,52 @@
                 <span class="section-subtitle" style="color: var(--primary-gold);">Événements Privés</span>
                 <h2>Votre Événement, Notre Passion</h2>
                 <p>
-                    Du cocktail d'entreprise au mariage de rêve, nous créons des expériences 
+                    Du cocktail d'entreprise au mariage de rêve, nous créons des expériences
                     sur-mesure qui dépassent vos attentes. Capacité jusqu'à 200 personnes.
                 </p>
             </div>
 
+            <!-- Private Events Gallery -->
+            <div class="private-events-gallery" data-aos="fade-up" data-aos-delay="200" style="margin: 50px 0;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 1000px; margin: 0 auto;">
+                    <div style="position: relative; height: 250px; overflow: hidden; border-radius: 8px;">
+                        <img src="../assets/images/gallery/interior-1.jpg" alt="Corporate Event" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px; color: white;">
+                            <p style="margin: 0; font-weight: 600;">Événements Corporate</p>
+                        </div>
+                    </div>
+                    <div style="position: relative; height: 250px; overflow: hidden; border-radius: 8px;">
+                        <img src="../assets/images/gallery/bar-area.jpg" alt="Wedding Reception" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px; color: white;">
+                            <p style="margin: 0; font-weight: 600;">Mariages & Réceptions</p>
+                        </div>
+                    </div>
+                    <div style="position: relative; height: 250px; overflow: hidden; border-radius: 8px;">
+                        <img src="../assets/images/gallery/karaoke.jpg" alt="Private Party" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px; color: white;">
+                            <p style="margin: 0; font-weight: 600;">Soirées Privées</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="event-types-showcase">
                 <div class="event-type-box" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-briefcase"></i>
                     <h4>Corporate</h4>
                     <p>Team buildings, lancements produits, séminaires, conférences</p>
                 </div>
 
                 <div class="event-type-box" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-heart"></i>
                     <h4>Mariages</h4>
                     <p>Réceptions, cocktails, cérémonies laïques, rehearsal dinners</p>
                 </div>
 
                 <div class="event-type-box" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-birthday-cake"></i>
                     <h4>Célébrations</h4>
                     <p>Anniversaires, graduations, fiançailles, baby showers</p>
                 </div>
 
                 <div class="event-type-box" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-glass-cheers"></i>
                     <h4>Cocktails</h4>
                     <p>Soirées privées, inaugurations, vernissages, galas</p>
                 </div>
@@ -868,7 +880,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 50px;" data-aos="fade-up">
-                <a href="../index.html#galerie" class="btn btn-outline btn-lg">
+                <a href="galerie.html" class="btn btn-outline btn-lg">
                     <i class="fas fa-images"></i> Voir Toute la Galerie
                 </a>
             </div>

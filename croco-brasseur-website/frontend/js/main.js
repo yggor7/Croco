@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initSmoothScroll();
     loadGalleryImages(); // Load gallery images from database
+    initShowcaseSlideshow(); // Load showcase slideshow on homepage
+    initPageHeroSlideshow(); // Load hero slideshow on pages like Menu
     initFAQ();
     initScrollAnimations();
     setActiveNavLink();
@@ -196,6 +198,117 @@ async function loadGalleryImages() {
         console.error('Error loading gallery images:', error);
         // If there's an error, initialize filters with existing HTML images
         initGalleryFilters();
+    }
+}
+
+// ========================================
+// SHOWCASE SLIDESHOW (Homepage)
+// ========================================
+
+async function initShowcaseSlideshow() {
+    try {
+        const response = await fetch('http://localhost:3000/api/gallery?actif=true');
+        const data = await response.json();
+
+        if (data.success && data.data.length > 0) {
+            // Group images by category
+            const imagesByCategory = {
+                interieur: [],
+                beers: [],
+                food: []
+            };
+
+            data.data.forEach(image => {
+                if (imagesByCategory[image.category]) {
+                    imagesByCategory[image.category].push(image.filepath);
+                }
+            });
+
+            // Start slideshow for each showcase item
+            document.querySelectorAll('.showcase-item').forEach(item => {
+                const category = item.getAttribute('data-category');
+                const sliderContainer = item.querySelector('.showcase-slider');
+
+                if (category && imagesByCategory[category] && imagesByCategory[category].length > 0) {
+                    const images = imagesByCategory[category];
+                    let currentIndex = 0;
+
+                    // Create slider items
+                    images.forEach((imagePath, index) => {
+                        const sliderItem = document.createElement('div');
+                        sliderItem.className = 'showcase-slider-item';
+                        if (index === 0) sliderItem.classList.add('active'); // First image is active
+                        sliderItem.style.backgroundImage = `url('${imagePath}')`;
+                        sliderContainer.appendChild(sliderItem);
+                    });
+
+                    const sliderItems = sliderContainer.querySelectorAll('.showcase-slider-item');
+
+                    // Auto-fade every 5 seconds (comme The Century Bar)
+                    setInterval(() => {
+                        // Remove active from current
+                        sliderItems[currentIndex].classList.remove('active');
+
+                        // Move to next
+                        currentIndex = (currentIndex + 1) % images.length;
+
+                        // Add active to new current
+                        sliderItems[currentIndex].classList.add('active');
+                    }, 5000);
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error loading showcase slideshow:', error);
+    }
+}
+
+// ========================================
+// PAGE HERO SLIDESHOW (for Menu, etc.)
+// ========================================
+
+async function initPageHeroSlideshow() {
+    try {
+        const heroSection = document.querySelector('.page-hero[data-category]');
+        if (!heroSection) return; // Exit if no hero with data-category
+
+        const category = heroSection.getAttribute('data-category');
+        const sliderContainer = heroSection.querySelector('.hero-slider');
+        if (!sliderContainer) return;
+
+        const response = await fetch('http://localhost:3000/api/gallery?actif=true');
+        const data = await response.json();
+
+        if (data.success && data.data.length > 0) {
+            // Filter images by category
+            const categoryImages = data.data
+                .filter(image => image.category === category)
+                .map(image => image.filepath);
+
+            if (categoryImages.length > 0) {
+                let currentIndex = 0;
+
+                // Create slider items
+                categoryImages.forEach((imagePath, index) => {
+                    const sliderItem = document.createElement('div');
+                    sliderItem.className = 'hero-slider-item';
+                    if (index === 0) sliderItem.classList.add('active');
+                    sliderItem.style.backgroundImage = `url('${imagePath}')`;
+                    sliderContainer.appendChild(sliderItem);
+                });
+
+                const sliderItems = sliderContainer.querySelectorAll('.hero-slider-item');
+
+                // Auto-fade every 5 seconds
+                setInterval(() => {
+                    sliderItems[currentIndex].classList.remove('active');
+                    currentIndex = (currentIndex + 1) % categoryImages.length;
+                    sliderItems[currentIndex].classList.add('active');
+                }, 5000);
+            }
+        }
+    } catch (error) {
+        console.error('Error loading page hero slideshow:', error);
     }
 }
 
@@ -490,29 +603,43 @@ if ('IntersectionObserver' in window) {
 function initCustomCursor() {
     // Check if device supports hover (not touch device)
     if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-        // Create cursor elements
-        const cursor = document.createElement('div');
-        cursor.className = 'custom-cursor';
-
-        // Create arrow cursor with SVG
+        // Create cursor arrow element
         const cursorArrow = document.createElement('div');
-        cursorArrow.className = 'custom-cursor-arrow';
+        cursorArrow.className = 'cursor-arrow';
         cursorArrow.innerHTML = `
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 3 L3 18 L8 13 L12 21 L14 20 L10 12 L18 12 Z"/>
+                <path d="M4 4 L4 20 L9 15 L13 23 L15 22 L11 14 L19 14 Z"/>
             </svg>
         `;
 
-        document.body.appendChild(cursor);
+        // Create glow effect
+        const cursorGlow = document.createElement('div');
+        cursorGlow.className = 'cursor-glow';
+
+        // Create gold trailing ring
+        const cursorTrail = document.createElement('div');
+        cursorTrail.className = 'cursor-trail';
+
+        // Create white outer ring
+        const cursorOuterRing = document.createElement('div');
+        cursorOuterRing.className = 'cursor-outer-ring';
+
         document.body.appendChild(cursorArrow);
+        document.body.appendChild(cursorGlow);
+        document.body.appendChild(cursorTrail);
+        document.body.appendChild(cursorOuterRing);
 
         // Track mouse position
         let mouseX = 0;
         let mouseY = 0;
-        let cursorX = 0;
-        let cursorY = 0;
         let arrowX = 0;
         let arrowY = 0;
+        let glowX = 0;
+        let glowY = 0;
+        let trailX = 0;
+        let trailY = 0;
+        let outerRingX = 0;
+        let outerRingY = 0;
 
         // Update mouse position
         document.addEventListener('mousemove', (e) => {
@@ -520,48 +647,83 @@ function initCustomCursor() {
             mouseY = e.clientY;
         });
 
-        // Smooth cursor animation
+        // Smooth cursor animation with different speeds
         function animateCursor() {
-            // Smooth follow for outer circle
-            cursorX += (mouseX - cursorX) * 0.15;
-            cursorY += (mouseY - cursorY) * 0.15;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-
-            // Faster follow for arrow
-            arrowX += (mouseX - arrowX) * 0.5;
-            arrowY += (mouseY - arrowY) * 0.5;
+            // Arrow follows fastest (most responsive)
+            const arrowLag = 0.35;
+            arrowX += (mouseX - arrowX) * arrowLag;
+            arrowY += (mouseY - arrowY) * arrowLag;
             cursorArrow.style.left = arrowX + 'px';
             cursorArrow.style.top = arrowY + 'px';
+
+            // Glow follows medium speed
+            const glowLag = 0.20;
+            glowX += (mouseX - glowX) * glowLag;
+            glowY += (mouseY - glowY) * glowLag;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+
+            // Gold trail follows medium-slow
+            const trailLag = 0.15;
+            trailX += (mouseX - trailX) * trailLag;
+            trailY += (mouseY - trailY) * trailLag;
+            cursorTrail.style.left = trailX + 'px';
+            cursorTrail.style.top = trailY + 'px';
+
+            // White outer ring follows slowest (creates lag effect)
+            const outerRingLag = 0.08;
+            outerRingX += (mouseX - outerRingX) * outerRingLag;
+            outerRingY += (mouseY - outerRingY) * outerRingLag;
+            cursorOuterRing.style.left = outerRingX + 'px';
+            cursorOuterRing.style.top = outerRingY + 'px';
 
             requestAnimationFrame(animateCursor);
         }
         animateCursor();
 
-        // Hover effects on interactive elements
-        const hoverElements = document.querySelectorAll('a, button, .btn, .filter-btn, .gallery-item, .nav-link, input, select, textarea, .faq-question');
+        // Hover effects
+        const hoverElements = document.querySelectorAll('a, button, .btn, .filter-btn, .gallery-item, .nav-link, input, select, textarea, .faq-question, .menu-item, .beer-card, .event-card, .weekly-event-card, .showcase-item, .reservation-btn, .map-info-card');
 
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.classList.add('hover');
                 cursorArrow.classList.add('hover');
+                cursorGlow.classList.add('hover');
+                cursorTrail.classList.add('hover');
+                cursorOuterRing.classList.add('hover');
             });
 
             el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('hover');
                 cursorArrow.classList.remove('hover');
+                cursorGlow.classList.remove('hover');
+                cursorTrail.classList.remove('hover');
+                cursorOuterRing.classList.remove('hover');
             });
+        });
+
+        // Click effect
+        document.addEventListener('mousedown', () => {
+            cursorArrow.classList.add('click');
+            cursorGlow.classList.add('click');
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursorArrow.classList.remove('click');
+            cursorGlow.classList.remove('click');
         });
 
         // Hide cursor when leaving window
         document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
             cursorArrow.style.opacity = '0';
+            cursorGlow.style.opacity = '0';
+            cursorTrail.style.opacity = '0';
+            cursorOuterRing.style.opacity = '0';
         });
 
         document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '0.8';
             cursorArrow.style.opacity = '1';
+            cursorGlow.style.opacity = '0.6';
+            cursorTrail.style.opacity = '0.8';
+            cursorOuterRing.style.opacity = '0.6';
         });
     }
 }

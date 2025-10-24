@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactez-nous - Réservations et informations">
+    <title>Contact - Le Croco Brasseur | Bujumbura's Premier Gastro-Brewpub</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.png" alt="Le Croco Brasseur Logo">
+            </a>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link">Accueil</a></li>
+                <li><a href="apropos.html" class="nav-link">À Propos</a></li>
+                <li><a href="brasserie.html" class="nav-link">Brasserie</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="events.html" class="nav-link">Événements</a></li>
+                <li><a href="galerie.html" class="nav-link">Galerie</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#reservation" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Réserver
+                </a>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/25776313132?text=Bonjour%20Le%20Croco%20Brasseur"
+       class="whatsapp-float" target="_blank" aria-label="Contact WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Hero Section - The Century Bar Style -->
+    <section class="page-hero" style="background-image: url('../assets/images/gallery/bar-area.jpg');" data-aos="fade">
+        <div class="page-hero-content">
+            <h1>Contactez-nous</h1>
+            <p>Get in Touch - Where Bujumbura Meets the World</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section section-padding" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <span class="section-subtitle">Contact</span>
+                    <h2 class="section-title">Get in Touch</h2>
+                    <p>Des questions? Envie de faire une réservation? Curieux de découvrir notre univers?</p>
+                    <p>L'équipe Croco Brasseur est là pour vous!</p>
+
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>20, Boulevard de l'Uprona<br>Rohero, Bujumbura Mairie</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="detail-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <p>+257 76 31 31 32<br>Lundi - Dimanche, 6h30 - Tard</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="detail-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@croco-brasseur.com<br>contact@lecrocobrasseur.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="detail-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div>
+                                <h4>Social Media</h4>
+                                <p><a href="https://instagram.com/lecrocobrasseur" target="_blank">@Le Croco Brasseur</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="contact-nom">Nom Complet *</label>
+                            <input type="text" id="contact-nom" name="nom_complet" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-email">Email *</label>
+                                <input type="email" id="contact-email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-tel">Téléphone</label>
+                                <input type="tel" id="contact-tel" name="telephone">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-sujet">Sujet *</label>
+                            <input type="text" id="contact-sujet" name="sujet" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-message">Message *</label>
+                            <textarea id="contact-message" name="message" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane"></i> Envoyer le Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" data-aos="fade-up">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 40px;">
+                <span class="section-subtitle">Localisation</span>
+                <h2 class="section-title">Trouvez-nous</h2>
+                <p class="section-description">
+                    Boulevard de l'Uprona No.20, Rohero - Bujumbura Mairie
+                </p>
+            </div>
+        </div>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.6173644687256!2d29.360661!3d-3.3806668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c183b4b5d8b5e5%3A0x5e3b9f3c4d2a1b0c!2sBlvd%20de%20l&#39;Uprona%2C%20Bujumbura!5e0!3m2!1sfr!2sbi!4v1640000000000!5m2!1sfr!2sbi"
+                width="100%"
+                height="500"
+                style="border:0; filter: brightness(0.9) contrast(1.1) saturate(1.3);"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <div class="map-overlay-info">
+                <div class="map-info-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="map-glow-effect"></div>
+                    <div class="map-info-icon">
+                        <i class="fas fa-map-marker-alt map-icon-pulse"></i>
+                        <div class="icon-ripple"></div>
+                        <div class="icon-ripple icon-ripple-delay"></div>
+                    </div>
+                    <div class="map-info-content">
+                        <h4>
+                            <span class="shimmer-text">Le Croco Brasseur</span>
+                        </h4>
+                        <p>
+                            <i class="fas fa-location-dot" style="color: var(--primary-gold); margin-right: 8px;"></i>
+                            20, Boulevard de l'Uprona<br>
+                            <span style="margin-left: 24px;">Rohero, Bujumbura Mairie</span>
+                        </p>
+                        <div class="map-actions">
+                            <a href="https://maps.google.com/?q=Boulevard+de+l'Uprona+20,+Rohero,+Bujumbura" target="_blank" class="btn btn-map-primary">
+                                <span class="btn-content">
+                                    <i class="fas fa-directions"></i>
+                                    <span>Itinéraire</span>
+                                </span>
+                                <span class="btn-glow"></span>
+                            </a>
+                            <a href="tel:+25776313132" class="btn btn-map-secondary">
+                                <i class="fas fa-phone"></i>
+                                <span>Appeler</span>
+                            </a>
+                        </div>
+                        <div class="map-info-footer">
+                            <div class="info-badge">
+                                <i class="fas fa-clock"></i>
+                                <span>Ouvert maintenant</span>
+                            </div>
+                            <div class="info-badge">
+                                <i class="fas fa-star"></i>
+                                <span>Premium</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation-section section-padding" id="reservation">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Réservation</span>
+                <h2 class="section-title">Book Your Experience</h2>
+                <p class="section-description">
+                    Réservez votre table ou contactez-nous pour un événement privé
+                </p>
+            </div>
+
+            <div class="reservation-grid">
+                <div class="reservation-info" data-aos="fade-right">
+                    <h3>Pourquoi Réserver?</h3>
+                    <ul class="benefits-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Garantissez votre table aux heures de pointe</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Demandes spéciales accommodées</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Service prioritaire</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Confirmation immédiate</span>
+                        </li>
+                    </ul>
+
+                    <div class="contact-methods">
+                        <h4>Ou Contactez-Nous Directement:</h4>
+                        <a href="tel:+25776313132" class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>+257 76 31 31 32</span>
+                        </a>
+                        <a href="https://wa.me/25776313132" class="contact-method" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="mailto:info@croco-brasseur.com" class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@croco-brasseur.com</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="reservation-form-container" data-aos="fade-left">
+                    <form id="reservation-form" class="reservation-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="prenom">Prénom *</label>
+                                <input type="text" id="prenom" name="prenom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nom">Nom *</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telephone">Téléphone *</label>
+                                <input type="tel" id="telephone" name="telephone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Date *</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="heure">Heure *</label>
+                                <select id="heure" name="heure" required>
+                                    <option value="">Choisir...</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
+                                    <option value="21:00">21:00</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="personnes">Nombre de Personnes *</label>
+                                <select id="personnes" name="personnes" required>
+                                    <option value="">Choisir...</option>
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                    <option value="5">5 personnes</option>
+                                    <option value="6">6 personnes</option>
+                                    <option value="7">7 personnes</option>
+                                    <option value="8">8 personnes</option>
+                                    <option value="9+">9+ personnes</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="occasion">Occasion</label>
+                                <select id="occasion" name="occasion">
+                                    <option value="">Sélectionner...</option>
+                                    <option value="Dîner classique">Dîner classique</option>
+                                    <option value="Anniversaire">Anniversaire</option>
+                                    <option value="Business">Repas d'affaires</option>
+                                    <option value="Célébration">Célébration</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Demandes Spéciales</label>
+                            <textarea id="message" name="message" rows="3" placeholder="Allergies, préférences de table, etc..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-calendar-check"></i> Confirmer la Réservation
+                        </button>
+
+                        <p class="form-note">
+                            * Champs obligatoires. Vous recevrez une confirmation par email et WhatsApp.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="../assets/images/logo.png" alt="Le Croco Brasseur" class="footer-logo">
+                    <p class="footer-tagline">Where Bujumbura Meets the World</p>
+                    <p class="footer-text">
+                        Craft beer, world-class cuisine, and unforgettable experiences in the heart of Bujumbura.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/lecrocobrasseur" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/lecrocobrasseur" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://wa.me/25776313132" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="apropos.html">À Propos</a></li>
+                        <li><a href="brasserie.html">Brasserie</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Événements</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#reservation">Réservations</a></li>
+                        <li><a href="events.html">Événements Privés</a></li>
+                        <li><a href="contact.html">Catering</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Horaires</h4>
+                    <p class="hours-text">
+                        <strong>Tous les jours</strong><br>
+                        6h30 - Tard dans la nuit
+                    </p>
+                    <p class="hours-text">
+                        <strong>Événements Spéciaux:</strong><br>
+                        Lundi: Open Mic (19h)<br>
+                        Samedi: Karaoke (20h)<br>
+                        Dimanche: Brunch (10h-15h)
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Le Croco Brasseur. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart"></i> in Bujumbura</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/booking.js"></script>
+</body>
+</html>
